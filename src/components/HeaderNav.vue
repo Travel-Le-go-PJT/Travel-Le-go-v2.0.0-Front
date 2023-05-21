@@ -50,8 +50,8 @@
               ><router-link
                 :to="{ name: 'userManagement' }"
                 class="link align-self-center"
-                >회원관리 {{ isLogin }}</router-link
-              >
+                >회원관리
+              </router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
