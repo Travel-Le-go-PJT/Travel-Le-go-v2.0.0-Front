@@ -7,55 +7,53 @@
         </b-alert>
       </b-col>
     </b-row>
+
     <b-row>
-      <b-col></b-col>
       <b-col cols="8">
-        <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
-          <b-form class="text-left">
-            <b-alert show variant="danger" v-if="isJoinError"
-              >아이디 또는 비밀번호를 확인하세요.</b-alert
-            >
-            <b-form-group
-              label="이름"
-              label-for="userName"
-              invalid-feedback="이름을 입력해주세요."
-              :state="nameState"
-            >
+        <b-card class="mt-3" style="max-width: 40rem" align="left">
+          <b-form @submit="join" @reset="onReset" v-if="show">
+            <b-form-group label="이름" label-for="userName">
               <b-form-input
                 id="userName"
                 v-model="joinUser.userName"
-                :state="nameState"
+                type="text"
+                placeholder="이름을 입력해주세요."
                 required
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              label="아이디"
-              label-for="userId"
-              invalid-feedback="아이디를 입력해주세요."
-              :state="idState"
-            >
+            <b-form-group label="아이디" label-for="userId" :state="idState">
               <b-form-input
                 id="userId"
                 v-model="joinUser.userId"
-                :state="idState"
+                type="text"
+                placeholder="아이디를 입력해주세요."
                 required
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              label="비밀번호"
-              label-for="userPwd"
-              invalid-feedback="비밀번호를 입력해주세요."
-              :state="pwdState"
-            >
+            <b-form-group label="비밀번호" label-for="userPwd">
               <b-form-input
                 id="userPwd"
                 v-model="joinUser.userPwd"
                 :state="pwdState"
                 type="password"
+                placeholder="비밀번호를 입력해주세요."
                 required
               ></b-form-input>
             </b-form-group>
-
+            <!-- <b-form-group
+              id="input-group-1"
+              label="Email address:"
+              label-for="input-1"
+              description="We'll never share your email with anyone else."
+            >
+              <b-form-input
+                id="input-1"
+                v-model="joinUser.userName"
+                type="email"
+                placeholder="Enter email"
+                required
+              ></b-form-input>
+            </b-form-group> -->
             <label for="emailId" class="form-label">이메일</label>
             <div class="d-flex justify-content-between">
               <input
@@ -79,9 +77,12 @@
                 <option value="google.com">google.com</option>
               </select>
             </div>
-            <b-button type="button" variant="success" class="m-1" @click="join"
+            <!-- <b-button type="submit" variant="success" class="m-1" @click="join"
               >회원가입</b-button
-            >
+            > -->
+
+            <b-button type="submit" variant="primary">회원가입</b-button>
+            <b-button type="reset" variant="danger">초기화</b-button>
           </b-form>
         </b-card>
       </b-col>
@@ -97,7 +98,7 @@ export default {
   components: {},
   data() {
     return {
-      isJoinError: false,
+      show: true,
       joinUser: {
         userId: null,
         userName: null,
@@ -109,7 +110,8 @@ export default {
   },
   created() {},
   methods: {
-    join() {
+    join(event) {
+      event.preventDefault();
       http
         .post("/user/join", {
           userId: this.joinUser.userId,
@@ -129,6 +131,18 @@ export default {
         .catch(() => {
           alert("가입 실패!");
         });
+    },
+    onReset(event) {
+      event.preventDefault();
+      this.joinUser.userId = "";
+      this.joinUser.userName = "";
+      this.joinUser.userPwd = "";
+      this.joinUser.emailId = "";
+      this.joinUser.emialDomain = "";
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
     },
   },
 };

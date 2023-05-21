@@ -3,15 +3,15 @@
     <b-row>
       <b-col>
         <b-alert variant="secondary" show>
-          <h3>로그인</h3>
+          <h3>LOG IN</h3>
         </b-alert>
       </b-col>
     </b-row>
     <b-row>
       <b-col></b-col>
       <b-col cols="8">
-        <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
-          <b-form class="text-left">
+        <b-card class="mt-3" style="max-width: 40rem" align="left">
+          <b-form>
             <b-alert show variant="danger" v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
@@ -20,7 +20,8 @@
                 id="userId"
                 v-model="user.userId"
                 required
-                placeholder="아이디 입력...."
+                type="text"
+                placeholder="아이디 입력해주세요."
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
@@ -30,19 +31,19 @@
                 id="userPwd"
                 v-model="user.userPwd"
                 required
-                placeholder="비밀번호 입력...."
+                placeholder="비밀번호 입력해주세요."
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
             <b-button
-              type="button"
+              type="submit"
               variant="primary"
               class="m-1"
               @click="confirm"
               >로그인</b-button
             >
             <b-button
-              type="button"
+              type="submit"
               variant="success"
               class="m-1"
               @click="movePage"
