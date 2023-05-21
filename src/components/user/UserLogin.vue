@@ -11,7 +11,7 @@
       <b-col></b-col>
       <b-col cols="8">
         <b-card class="mt-3" style="max-width: 40rem" align="left">
-          <b-form>
+          <b-form @submit="confirm">
             <b-alert show variant="danger" v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
@@ -36,14 +36,14 @@
               ></b-form-input>
             </b-form-group>
             <b-button
-              type="submit"
+              type="button"
               variant="primary"
               class="m-1"
               @click="confirm"
               >로그인</b-button
             >
             <b-button
-              type="submit"
+              type="button"
               variant="success"
               class="m-1"
               @click="movePage"
@@ -82,6 +82,16 @@ export default {
       //토큰을 받아온 후에 아래 코드를 실행해야하기 때문에 await
       await this.userConfirm(this.user);
       console.log("user : " + this.user.userId + " " + this.user.userPwd);
+      if (this.user.userId == null) {
+        console.log("아이디 없음 " + this.user.userId);
+        alert("아이디를 입력하세요.");
+        return;
+      }
+      if (this.user.userPwd == null) {
+        console.log("비밀번호 없음 " + this.user.userPwd);
+        alert("비밀번호를 입력하세요.");
+        return;
+      }
       let token = sessionStorage.getItem("access-token");
       console.log("1. confirm() token >> " + token);
       if (this.isLogin) {
