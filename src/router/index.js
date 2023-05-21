@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import MapView from "@/views/MapView.vue";
 import TripPlanView from "@/views/TripPlanView.vue";
-import HotPlaceView from "@/views/HotPlaceView.vue";
 import UserView from "@/views/UserView.vue";
 import store from "@/store";
 
@@ -117,11 +116,6 @@ const routes = [
       //   component: () => import(/* webpackChunkName: "board" */ "@/components/tripplan/BoardDelete"),
       // },
     ],
-  },
-  {
-    path: "/hotplace",
-    name: "hotplace",
-    component: HotPlaceView,
   },
   {
     path: "/tripinfo",
