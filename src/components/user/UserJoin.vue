@@ -11,7 +11,7 @@
     <b-row>
       <b-col cols="8">
         <b-card class="mt-3" style="max-width: 40rem" align="left">
-          <b-form @submit="join" @reset="onReset" v-if="show">
+          <b-form @submit="join" v-if="show">
             <b-form-group label="이름" label-for="userName">
               <b-form-input
                 id="userName"
@@ -23,12 +23,18 @@
             </b-form-group>
             <b-form-group label="아이디" label-for="userId" :state="idState">
               <b-form-input
-                id="userId"
+                id="userId-input"
                 v-model="joinUser.userId"
                 type="text"
                 placeholder="아이디를 입력해주세요."
                 required
               ></b-form-input>
+              <b-button
+                type="button"
+                variant="primary"
+                @click="IdDuplicateCheck(joinUser.userId)"
+                >중복검사</b-button
+              >
             </b-form-group>
             <b-form-group label="비밀번호" label-for="userPwd">
               <b-form-input
@@ -99,6 +105,7 @@ export default {
   data() {
     return {
       show: true,
+      idcheck: false,
       joinUser: {
         userId: null,
         userName: null,
@@ -124,6 +131,8 @@ export default {
           if (data.result == "SUCCESS") {
             alert("가입 성공!");
             this.$router.push({ name: "home" });
+          } else if (data.result == "DUPLICATE") {
+            alert("아이디 중복 검사를 확인하세요");
           } else {
             alert("가입 실패!");
           }
@@ -132,20 +141,35 @@ export default {
           alert("가입 실패!");
         });
     },
-    onReset(event) {
-      event.preventDefault();
-      this.joinUser.userId = "";
-      this.joinUser.userName = "";
-      this.joinUser.userPwd = "";
-      this.joinUser.emailId = "";
-      this.joinUser.emialDomain = "";
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    IdDuplicateCheck(userId) {
+      console.log(userId);
+      http
+        .get(`/user/idcheck/${userId}`)
+        .then(({ data }) => {
+          console.log(data.result);
+          if (data.result == "SUCCESS") {
+            this.idcheck = true;
+            console.log("사용가능");
+            alert("아이디 사용 가능");
+          }
+          if (data.result == "DUPLICATE") {
+            this.idcheck = false;
+            alert("아이디 중복");
+          } else {
+            console.log("dfdfs");
+          }
+        })
+        .catch(() => {
+          console.log("dff");
+        });
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-control {
+  width: 300px;
+  display: inline;
+}
+</style>
