@@ -56,8 +56,8 @@ const routes = [
         component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserMyPage.vue"),
       },
       {
-        path: "infomodify",
-        name: "infomodify",
+        path: "usermodify",
+        name: "usermodify",
         component: () =>
           import(/* webpackChunkName: "user" */ "@/components/user/UserInfoModify.vue"),
       },
