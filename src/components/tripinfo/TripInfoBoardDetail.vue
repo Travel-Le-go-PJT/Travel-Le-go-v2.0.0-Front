@@ -71,10 +71,10 @@ export default {
       });
     },
     moveList() {
-      this.$router.push(`/tripinfo/list`);
+      this.$router.push(`/tripinfo/infolist`);
     },
     moveModify(no) {
-      this.$router.push(`/tripinfo/modify/${no}`);
+      this.$router.push(`/tripinfo/infomodify/${no}`);
     },
   },
   filters: {

@@ -11,7 +11,7 @@
       <b-col></b-col>
       <b-col cols="8">
         <b-jumbotron>
-          <template #header>My Page</template>
+          <template #header>modify</template>
 
           <template #lead>내 정보 확인페이지입니다.</template>
 
@@ -45,7 +45,7 @@
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1" @click="movepage">정보수정</b-button>
+          <b-button variant="primary" href="#" class="mr-1">정보수정</b-button>
           <b-button variant="danger" href="#" @click="userWithdraw">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
@@ -60,7 +60,7 @@ import http from "@/api/http";
 
 const userStore = "userStore";
 export default {
-  name: "UserMyPage",
+  name: "UserInfoModify",
   components: {},
   computed: {
     ...mapState(userStore, ["userInfo"]),
@@ -76,9 +76,6 @@ export default {
         this.$router.push({ name: "home" });
         if (this.$route.path != "/") this.$router.push({ name: "home" });
       }
-    },
-    movepage() {
-      this.$router.push({ name: "infomodify" });
     },
   },
 };
