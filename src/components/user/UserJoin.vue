@@ -136,6 +136,7 @@ export default {
             alert("가입 실패!");
           }
         })
+
         .catch(() => {
           alert("가입 실패!");
         });
