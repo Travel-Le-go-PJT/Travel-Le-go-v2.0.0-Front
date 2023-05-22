@@ -1,14 +1,14 @@
 <template>
-  <div id="cardbox" class="col-md-3">
+  <div id="cardbox" class="col-md-4 p-3" >
     <div id="card">
       <div class="card-header">{{ article.userId }}</div>
       <img class="card-img-top" src="" alt="">
       <div class="card-body">
         <h5 class="card-title">{{ article.subject }}</h5>
         <p class="card-text">{{ article.subject }}</p>
-      </div>
-      <div class="card-footer">
         <button type="button" @click="showArticle(article.articleNo)" class="btn-hover color-3">자세히보기</button>
+        <button type="button" class="btn-hover color-3"><b-icon icon="heart"></b-icon></button>
+      
       </div>
     </div>
   </div>
@@ -54,9 +54,9 @@ card-img-top {
 }
 
 .btn-hover {
-  width: 100px;
+  width: 80px;
   font-family: omyu_pretty;
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;

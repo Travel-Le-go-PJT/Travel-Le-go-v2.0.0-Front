@@ -1,6 +1,8 @@
 <template>
   <div id="container">
-    <h1 id="title">여행 계획</h1>
+    <div>
+      <h1 id="title">당신의 여행 계획을 공유해보세요!</h1>
+    </div>
     <router-view></router-view>
   </div>
 </template>
