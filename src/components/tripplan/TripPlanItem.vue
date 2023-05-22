@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     showArticle(no) {
-      this.$router.push(`/tripplan/detail/${no}`);
+      this.$router.push(`/tripplan/plandetail/${no}`);
     },
     favorite(no) {
       let myData = {

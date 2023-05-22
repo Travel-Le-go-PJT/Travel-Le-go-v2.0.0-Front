@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     write() {
-      this.$router.push("/tripplan/write");
+      this.$router.push("/tripplan/planwrite");
     },
     getAllPlans(){
       http.get('/tripPlanBoard/')

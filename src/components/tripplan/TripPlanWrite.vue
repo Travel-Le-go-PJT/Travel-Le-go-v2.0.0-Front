@@ -113,7 +113,7 @@ export default {
         http.post('/tripPlanBoard/', myData)
           .then(({ data }) => {
             if (data.result == "SUCCESS") {
-              this.$router.push("/tripplan/list");
+              this.$router.push("/tripplan/planlist");
             }
           })
           .catch(() => {
