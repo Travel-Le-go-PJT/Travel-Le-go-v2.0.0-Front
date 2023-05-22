@@ -2,13 +2,7 @@
   <div class="boardList">
     <h1 id="title"></h1>
     <div>
-      <button
-        type="button"
-        class="btn-hover color-3"
-        @click="writeArticle(article.articleNo)"
-      >
-        글 쓰기
-      </button>
+      <button type="button" class="btn-hover color-3" @click="writeArticle(article.articleNo)">글 쓰기</button>
     </div>
     <div>
       <table id="book-list">
@@ -103,7 +97,7 @@ export default {
       this.boardList();
     },
     writeArticle() {
-      this.$router.push(`/tripinfo/write`);
+      this.$router.push(`/tripinfo/infowrite`);
     },
   },
 };

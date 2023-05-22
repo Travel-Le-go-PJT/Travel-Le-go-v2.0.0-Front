@@ -28,7 +28,7 @@ export default {
   methods: {
     showArticle(no) {
       console.log("---------------------->" + no);
-      this.$router.push(`/tripinfo/detail/${no}`);
+      this.$router.push(`/tripinfo/infodetail/${no}`);
     },
     showArts(content) {
       console.log(content);

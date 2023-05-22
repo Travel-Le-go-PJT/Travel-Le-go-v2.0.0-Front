@@ -74,7 +74,7 @@ export default {
       });
     },
     moveList() {
-      this.$router.push(`/tripinfo/list`);
+      this.$router.push(`/tripinfo/infolist`);
     },
   },
   filters: {},
