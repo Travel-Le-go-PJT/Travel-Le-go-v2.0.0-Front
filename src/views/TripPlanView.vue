@@ -28,7 +28,7 @@ export default {
 #title {
   font-family: KCC-Jeongbeom;
   color: #ff9900;
-  width: 450px;
+  width: 600px;
   text-align: center;
   margin: 0 auto;
 }

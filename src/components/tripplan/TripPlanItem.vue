@@ -87,9 +87,31 @@ export default {
     },
   },
   watch: {
-    // article: {
+    article() {
+
+      let myData = {
+        articleNo: this.article.articleNo,
+        userId: this.userInfo.userId,
+      };
+      http
+        .get("/tripPlanBoard/favorite", {
+          params: myData,
+        })
+        .then(({ data }) => {
+          if (data) {
+            this.isFavorite = true;
+            this.favoriteIcon = "heart-fill";
+          } else {
+            this.isFavorite = false;
+            this.favoriteIcon = "heart";
+          }
+        })
+        .catch(() => {});
+     
+    },
+    // articleKey: {
     //   handler(newVal) {
-    //     console.log(newVal);
+    //     console.log(newVal)
     //     let myData = {
     //       articleNo: newVal.value,
     //       userId: this.userInfo.userId,
@@ -110,31 +132,7 @@ export default {
     //       .catch(() => {});
     //   },
     //   deep: true,
-    // },
-    articleKey: {
-      handler(newVal) {
-        console.log(newVal)
-        let myData = {
-          articleNo: newVal.value,
-          userId: this.userInfo.userId,
-        };
-        http
-          .get("/tripPlanBoard/favorite", {
-            params: myData,
-          })
-          .then(({ data }) => {
-            if (data) {
-              this.isFavorite = true;
-              this.favoriteIcon = "heart-fill";
-            } else {
-              this.isFavorite = false;
-              this.favoriteIcon = "heart";
-            }
-          })
-          .catch(() => {});
-      },
-      deep: true,
-  },
+    //},
   },
 
 
