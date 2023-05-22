@@ -46,7 +46,7 @@
           <hr class="my-4" />
 
           <b-button variant="primary" href="#" class="mr-1">정보수정</b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="danger" href="#" @click="userWithdraw">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -55,7 +55,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import http from "@/api/http";
 
 const userStore = "userStore";
 export default {
@@ -63,6 +64,19 @@ export default {
   components: {},
   computed: {
     ...mapState(userStore, ["userInfo"]),
+  },
+  methods: {
+    ...mapActions(userStore, ["userLogout"]),
+    userWithdraw() {
+      if (confirm("회원을 탈퇴하시겠습니까?") == true) {
+        sessionStorage.removeItem("access-token");
+        sessionStorage.removeItem("refresh-token");
+        http.put(`/user/${this.userInfo.userId}`);
+        this.userLogout(this.userInfo.userId);
+        this.$router.push({ name: "home" });
+        if (this.$route.path != "/") this.$router.push({ name: "home" });
+      }
+    },
   },
 };
 </script>
