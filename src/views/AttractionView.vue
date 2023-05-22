@@ -22,12 +22,22 @@
         </div>
       </div>
     </div>
-    <b-modal v-model="isModalOpen" title="상세 정보">
-      <div v-if="selectedLocation">
-        <h5>{{ selectedLocation.sidoName }}</h5>
-        <img :src="selectedLocation.image" :alt="selectedLocation.title" style="max-width: 100%; margin-bottom: 1rem;" />
-        <p>{{ selectedLocation.description }}</p>
-      </div>
+    <b-modal v-model="isModalOpen" hide-header hide-footer size="lg" body-class="p-0"
+      dialog-class="modal-dialog-centered">
+      <template #default="{ cancel }">
+        <div class="d-flex" style="top: 50%;">
+          <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
+            <img :src="selectedLocation.image" class="modal-image" :alt="selectedLocation.sidoName">
+          </div>
+          <div class="modal-content-wrapper p-4" style="flex: 6;">
+            <h3>{{ selectedLocation.sidoName }}</h3>
+            <h6>{{ selectedLocation.engName }}</h6>
+            <p>{{ selectedLocation.description }}</p>
+            <b-button variant="primary">일정 만들기</b-button>
+          </div>
+          <b-icon icon="x-lg" class="close-icon" @click="cancel"></b-icon>
+        </div>
+      </template>
     </b-modal>
   </div>
 </template>
@@ -60,13 +70,13 @@ export default {
   },
   methods: {
     openModal(location) {
-      console.log("asdad");
       this.selectedLocation = location;
       this.isModalOpen = true;
     },
     makeImageName(image) {
       return image;
     },
+
   }
 }
 </script>
@@ -93,6 +103,22 @@ export default {
   object-fit: fill;
   height: 300px;
 }
+
+.modal-image {
+  object-fit: fill;
+  max-width: 300px
+}
+
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #000;
+  font-size: 20px;
+}
+
 
 #container {
   padding: 20px;
