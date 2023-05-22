@@ -39,7 +39,7 @@
           </b-nav-item>
           <b-nav-item-dropdown right class="align-self-center">
             {{ userInfo.userName }}({{ userInfo.userId }})님
-            <b-dropdown-item href="#" v-if="userInfo.userClass == 1">
+            <b-dropdown-item href="#" v-if="userInfo.userRole == 1">
               <router-link
                 :to="{ name: 'mypage' }"
                 class="link align-self-center"
@@ -72,7 +72,7 @@
             </template>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'join' }" class="link">
-                <b-icon icon="person-circle"></b-icon>회원가입 {{ isLogins }}
+                <b-icon icon="person-circle"></b-icon>회원가입
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
