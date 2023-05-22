@@ -15,7 +15,7 @@
     </div>
     <div class="row" id="board">
       <template v-for="(article) in articles">
-        <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
+        <trip-plan-item :article="article" :key="article.articleNo" :articleKey="getArticleKey(article)" ></trip-plan-item>
       </template>
     </div>
   </div>
@@ -52,18 +52,22 @@ export default {
       http.get('/tripPlanBoard/')
       .then(({ data }) => {
         this.articles = data;
+        console.log(this.articles)
       }).catch((error) => {
         console.log(error);
       });
     },
     getMyPlans(){
+      let myData = {
+        key: "trip_plan_user_id",
+        word: this.userInfo.userId
+      }
       http.get('/tripPlanBoard/',{
-        parmas: {
-          trip_plan_user_id: this.userInfo.userId
-        }
+        params: myData
       })
       .then(({ data }) => {
         this.articles = data;
+        console.log(this.articles)
       }).catch((error) => {
         console.log(error);
       });
@@ -73,12 +77,20 @@ export default {
       .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
       .then(({ data }) => {
         this.articles = data;
+        console.log(this.articles)
       })
       .catch((error) => {
         console.log(error);
       });
-    }
+    },
+    getArticleKey(article) {
+      const currentTime = new Date().getTime();
+      return { value: article.articleNo ,
+                time : currentTime + article.articleNo
+      };
+    },
   },
+  
   
 
 }

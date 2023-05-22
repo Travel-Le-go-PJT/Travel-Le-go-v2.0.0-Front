@@ -81,8 +81,6 @@ export default {
                 userId: this.userInfo.userId
             }
             if (this.isFavorite) {
-
-                console.log(myData);
                 http.delete("/tripPlanBoard/favorite", {
                     params: myData
                 })
