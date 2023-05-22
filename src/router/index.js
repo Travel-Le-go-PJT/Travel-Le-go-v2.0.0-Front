@@ -72,7 +72,7 @@ const routes = [
     path: "/tripplan",
     name: "tripplan",
     component: TripPlanView,
-    redirect: "/tripplan/list",
+    redirect: "/tripplan/planlist",
     children: [
       {
         path: "planlist",
@@ -111,7 +111,7 @@ const routes = [
     name: "tripinfo",
     beforeEnter: onlyAuthUser,
     component: () => import(/* webpackChunkName: "tripinfo" */ "../views/TripInfoView.vue"),
-    redirect: "/tripinfo/list",
+    redirect: "/tripinfo/infolist",
     children: [
       {
         path: "infolist",
