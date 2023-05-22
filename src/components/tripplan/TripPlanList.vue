@@ -1,12 +1,19 @@
 <template>
   <div class="boardGallery">
-    <b-button @click="write" class="btn-hover color-3">글쓰기</b-button>
-    <div class>
-      <div class="row">
-        <template v-for="(article, index) in articles">
-          <trip-plan-item :article="article" :key="index"></trip-plan-item>
-        </template>
+    <div id="header">
+      <h6>가고 싶은 여행지를 검색해보세요!</h6>
+      <div id="searchBox">
+        <b-form-input v-model="keyword"  type="text" ref="keyword" placeholder="검색어를 입력해주세요"
+          @keydown.enter="searchMap" required>
+        </b-form-input>
+        <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
       </div>
+      <b-button @click="write" class="btn-hover color-3 mt-4 mb-3">글쓰기</b-button>
+    </div>
+    <div class="row" id="board">
+      <template v-for="(article, index) in articles">
+        <trip-plan-item :article="article" :key="index"></trip-plan-item>
+      </template>
     </div>
   </div>
 </template>
@@ -55,6 +62,16 @@ export default {
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+}
+#board{
+  width: 70vw;
+  margin: 0 auto;
+}
+
+#searchBox{
+  margin: 0 auto;
+  display: flex;
+  width:200px
 }
 
 #title {
