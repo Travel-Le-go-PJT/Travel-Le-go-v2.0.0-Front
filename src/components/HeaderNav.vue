@@ -17,7 +17,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="#">
-            <router-link :to="{ name: 'map' }" class="m-2 link">
+            <router-link :to="{ name: 'attraction' }" class="m-2 link">
               <b-icon icon="map" font-scale="2"></b-icon>지역별여행지
             </router-link>
             <router-link :to="{ name: 'tripplan' }" class="m-2 link">

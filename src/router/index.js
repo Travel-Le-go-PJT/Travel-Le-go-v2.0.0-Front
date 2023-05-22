@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import MapView from "@/views/MapView.vue";
+import AttractionView from "@/views/AttractionView.vue";
 import TripPlanView from "@/views/TripPlanView.vue";
 import UserView from "@/views/UserView.vue";
 import store from "@/store";
@@ -64,9 +64,9 @@ const routes = [
     ],
   },
   {
-    path: "/map",
-    name: "map",
-    component: MapView,
+    path: "/attraction",
+    name: "attraction",
+    component: AttractionView,
   },
   {
     path: "/tripplan",
