@@ -33,8 +33,7 @@
                 type="button"
                 variant="primary"
                 @click="IdDuplicateCheck(joinUser.userId)"
-                >중복검사</b-button
-              >
+              >중복검사</b-button>
             </b-form-group>
             <b-form-group label="비밀번호" label-for="userPwd">
               <b-form-input
@@ -59,7 +58,7 @@
                 placeholder="Enter email"
                 required
               ></b-form-input>
-            </b-form-group> -->
+            </b-form-group>-->
             <label for="emailId" class="form-label">이메일</label>
             <div class="d-flex justify-content-between">
               <input
@@ -85,7 +84,7 @@
             </div>
             <!-- <b-button type="submit" variant="success" class="m-1" @click="join"
               >회원가입</b-button
-            > -->
+            >-->
 
             <b-button type="submit" variant="primary">회원가입</b-button>
             <b-button type="reset" variant="danger">초기화</b-button>
@@ -160,7 +159,7 @@ export default {
           }
         })
         .catch(() => {
-          console.log("dff");
+          console.log("아이디 중복 체크 실패 ");
         });
     },
   },
