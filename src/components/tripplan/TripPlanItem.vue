@@ -45,6 +45,7 @@ export default {
   },
   props: {
     article: {},
+    articleKey: {},
   },
   filters: {
     showTime(value) {
@@ -53,10 +54,11 @@ export default {
   },
   computed: {
     ...mapState("userStore", ["userInfo"]),
+    
   },
   methods: {
     showArticle(no) {
-      this.$router.push(`/tripplan/detail/${no}`);
+      this.$router.push(`/tripplan/plandetail/${no}`);
     },
     favorite(no) {
       let myData = {
@@ -85,28 +87,62 @@ export default {
     },
   },
   watch: {
-    article() {
-      let myData = {
-        articleNo: this.article.articleNo,
-        userId: this.userInfo.userId,
-      };
-      http
-        .get("/tripPlanBoard/favorite", {
-          params: myData,
-        })
-        .then(({ data }) => {
-          console.log(myData.articleNo +" "+data);
-          if (data) {
-            this.isFavorite = true;
-            this.favoriteIcon = "heart-fill";
-          } else {
-            this.isFavorite = false;
-            this.favoriteIcon = "heart";
-          }
-        })
-        .catch(() => {});
-    },
+    // article: {
+    //   handler(newVal) {
+    //     console.log(newVal);
+    //     let myData = {
+    //       articleNo: newVal.value,
+    //       userId: this.userInfo.userId,
+    //     };
+    //     http
+    //       .get("/tripPlanBoard/favorite", {
+    //         params: myData,
+    //       })
+    //       .then(({ data }) => {
+    //         if (data) {
+    //           this.isFavorite = true;
+    //           this.favoriteIcon = "heart-fill";
+    //         } else {
+    //           this.isFavorite = false;
+    //           this.favoriteIcon = "heart";
+    //         }
+    //       })
+    //       .catch(() => {});
+    //   },
+    //   deep: true,
+    // },
+    articleKey: {
+      handler(newVal) {
+        console.log(newVal)
+        let myData = {
+          articleNo: newVal.value,
+          userId: this.userInfo.userId,
+        };
+        http
+          .get("/tripPlanBoard/favorite", {
+            params: myData,
+          })
+          .then(({ data }) => {
+            if (data) {
+              this.isFavorite = true;
+              this.favoriteIcon = "heart-fill";
+            } else {
+              this.isFavorite = false;
+              this.favoriteIcon = "heart";
+            }
+          })
+          .catch(() => {});
+      },
+      deep: true,
   },
+  },
+
+
+
+
+
+
+
 };
 </script>
 

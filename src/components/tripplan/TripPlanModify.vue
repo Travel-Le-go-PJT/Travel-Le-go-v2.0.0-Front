@@ -138,13 +138,13 @@ export default {
         http.put(`/tripPlanBoard/`, myData).then(({ data }) => {
           if (data != null) {
             alert("글 수정 성공");
-            this.$router.push(`/tripplan/detail/${this.article.articleNo}`);
+            this.$router.push(`/tripplan/plandetail/${this.article.articleNo}`);
           }
         });
       }
     },
     cancel() {
-      this.$router.push(`/tripplan/detail/${this.article.articleNo}`);
+      this.$router.push(`/tripplan/plandetail/${this.article.articleNo}`);
     }
   }
 }

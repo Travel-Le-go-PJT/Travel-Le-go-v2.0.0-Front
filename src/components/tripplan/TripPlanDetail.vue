@@ -48,14 +48,14 @@ export default {
             http.delete(`/tripPlanBoard/${no}`).then(({ data }) => {
                 if (data.result == "SUCCESS") {
                     alert("글 삭제 성공");
-                    this.$router.push("/tripplan/list");
+                    this.$router.push("/tripplan/planlist");
                 } else {
                     alert("글 삭제 실패");
                 }
             });
         },
         moveModify(no) {
-            this.$router.push(`/tripplan/modify/${no}`);
+            this.$router.push(`/tripplan/planmodify/${no}`);
         },
         getAttractionInfos() {
             const promises = this.planNums.map((p) => {

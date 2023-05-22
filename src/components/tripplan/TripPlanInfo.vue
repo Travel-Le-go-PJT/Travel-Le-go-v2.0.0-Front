@@ -59,21 +59,21 @@ export default {
     },
     methods: {
         moveList() {
-            this.$router.push("/tripplan/");
+            this.$router.push("/tripplan/planlist");
         },
         removeArticle(no) {
             http.delete(`/tripPlanBoard/${no}`)
                 .then(({ data }) => {
                     if (data.result == "SUCCESS") {
                         alert("글 삭제 성공");
-                        this.$router.push("/tripplan/list");
+                        this.$router.push("/tripplan/planlist");
                     } else {
                         alert("글 삭제 실패");
                     }
                 });
         },
         moveModify(no) {
-            this.$router.push(`/tripplan/modify/${no}`);
+            this.$router.push(`/tripplan/planmodify/${no}`);
         },
         favorite(no) {
             let myData = {
@@ -81,8 +81,6 @@ export default {
                 userId: this.userInfo.userId
             }
             if (this.isFavorite) {
-
-                console.log(myData);
                 http.delete("/tripPlanBoard/favorite", {
                     params: myData
                 })
