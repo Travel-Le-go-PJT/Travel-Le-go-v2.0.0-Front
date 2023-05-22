@@ -92,7 +92,7 @@ export default {
     },
     moveDetail(no) {
       console.log(no);
-      this.$router.push(`/tripinfo/detail/${no}`);
+      this.$router.push(`/tripinfo/infodetail/${no}`);
     },
     cancelModify(no) {
       if (confirm("수정을 취소하시겠습니까?")) {
