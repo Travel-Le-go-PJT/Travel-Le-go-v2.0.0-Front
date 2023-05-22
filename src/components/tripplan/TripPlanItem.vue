@@ -9,20 +9,13 @@
 
         <div class="row">
           <div class="col-6">
-            <button
-              type="button"
-              @click="showArticle(article.articleNo)"
-              class="btn-hover"
-            >
+            <button type="button" @click="showArticle(article.articleNo)" class="btn-hover">
               자세히보기
             </button>
           </div>
           <div class="col-6 d-flex justify-content-center align-items-center">
-            <b-button
-              variant="outline-danger"
-              style="box-shadow: none; width:160px;height:40px"
-              @click="favorite(article.articleNo)"
-            >
+            <b-button variant="outline-danger" style="box-shadow: none; width:160px;height:40px"
+              @click="favorite(article.articleNo)">
               <b-icon :icon="favoriteIcon"></b-icon>
             </b-button>
           </div>
@@ -43,6 +36,26 @@ export default {
       isFavorite: false,
     };
   },
+  mounted() {
+    let myData = {
+      articleNo: this.article.articleNo,
+      userId: this.userInfo.userId,
+    };
+    http
+      .get("/tripPlanBoard/favorite", {
+        params: myData,
+      })
+      .then(({ data }) => {
+        if (data) {
+          this.isFavorite = true;
+          this.favoriteIcon = "heart-fill";
+        } else {
+          this.isFavorite = false;
+          this.favoriteIcon = "heart";
+        }
+      })
+      .catch(() => { });
+  },
   props: {
     article: {},
     articleKey: {},
@@ -54,7 +67,7 @@ export default {
   },
   computed: {
     ...mapState("userStore", ["userInfo"]),
-    
+
   },
   methods: {
     showArticle(no) {
@@ -86,60 +99,6 @@ export default {
       }
     },
   },
-  watch: {
-    article() {
-
-      let myData = {
-        articleNo: this.article.articleNo,
-        userId: this.userInfo.userId,
-      };
-      http
-        .get("/tripPlanBoard/favorite", {
-          params: myData,
-        })
-        .then(({ data }) => {
-          if (data) {
-            this.isFavorite = true;
-            this.favoriteIcon = "heart-fill";
-          } else {
-            this.isFavorite = false;
-            this.favoriteIcon = "heart";
-          }
-        })
-        .catch(() => {});
-     
-    },
-    // articleKey: {
-    //   handler(newVal) {
-    //     console.log(newVal)
-    //     let myData = {
-    //       articleNo: newVal.value,
-    //       userId: this.userInfo.userId,
-    //     };
-    //     http
-    //       .get("/tripPlanBoard/favorite", {
-    //         params: myData,
-    //       })
-    //       .then(({ data }) => {
-    //         if (data) {
-    //           this.isFavorite = true;
-    //           this.favoriteIcon = "heart-fill";
-    //         } else {
-    //           this.isFavorite = false;
-    //           this.favoriteIcon = "heart";
-    //         }
-    //       })
-    //       .catch(() => {});
-    //   },
-    //   deep: true,
-    //},
-  },
-
-
-
-
-
-
 
 };
 </script>
@@ -147,8 +106,7 @@ export default {
 <style scoped>
 @font-face {
   font-family: "omyu_pretty";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
-    format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -198,13 +156,11 @@ card-img-top {
 }
 
 .btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #fca533,
-    #7dd66b,
-    #bad737
-  );
+  background-image: linear-gradient(to right,
+      #f3f04f,
+      #fca533,
+      #7dd66b,
+      #bad737);
   box-shadow: 0 4px 15px 0 rgba(145, 79, 68, 0.75);
 }
 </style>
