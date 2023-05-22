@@ -78,7 +78,7 @@ export default {
       }
     },
     movepage() {
-      this.$router.push({ name: "infomodify" });
+      this.$router.push({ name: "usermodify" });
     },
   },
 };

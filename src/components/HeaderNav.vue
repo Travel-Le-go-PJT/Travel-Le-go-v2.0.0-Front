@@ -32,34 +32,22 @@
         <!-- after login -->
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center">
-            <b-avatar
-              variant="primary"
-              v-text="userInfo.userId.charAt(0).toUpperCase()"
-            ></b-avatar>
+            <b-avatar variant="primary" v-text="userInfo.userId.charAt(0).toUpperCase()"></b-avatar>
           </b-nav-item>
           <b-nav-item-dropdown right class="align-self-center">
             {{ userInfo.userName }}({{ userInfo.userId }})님
             <b-dropdown-item href="#" v-if="userInfo.userRole == 1">
-              <router-link
-                :to="{ name: 'mypage' }"
-                class="link align-self-center"
-                >마이페이지</router-link
-              >
+              <router-link :to="{ name: 'mypage' }" class="link align-self-center">마이페이지</router-link>
             </b-dropdown-item>
-            <b-dropdown-item href="#" v-else
-              ><router-link
-                :to="{ name: 'userManagement' }"
-                class="link align-self-center"
-                >회원관리
-              </router-link>
+            <b-dropdown-item href="#" v-else>
+              <router-link :to="{ name: 'userManagement' }" class="link align-self-center">회원관리</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
                 id="logout"
                 class="align-self-center link"
                 @click.prevent="onClickLogout"
-                >로그아웃</b-nav-item
-              >
+              >로그아웃</b-nav-item>
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -105,8 +93,12 @@ export default {
     ...mapActions(userStore, ["userLogout"]),
     onClickLogout() {
       // action에서 userLogout 실행해서 서버 디비에 저장된 리프레시 토큰 지우기
+      this.$store.state.userStore.isLogin = false;
+      console.log(this.isLogin);
       console.log(this.userInfo.userId + " 로그아웃");
       this.userLogout(this.userInfo.userId);
+      this.$store.state.userStore.isLogin = false;
+      console.log(this.isLogin);
       sessionStorage.removeItem("access-token");
       sessionStorage.removeItem("refresh-token");
       if (this.$route.path != "/") this.$router.push({ name: "home" });
