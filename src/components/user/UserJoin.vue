@@ -129,7 +129,7 @@ export default {
         .then(({ data }) => {
           if (data.result == "SUCCESS") {
             alert("가입 성공!");
-            this.$router.push({ name: "home" });
+            this.$router.push({ name: "login" });
           } else if (data.result == "DUPLICATE") {
             alert("아이디 중복 검사를 확인하세요");
           } else {
