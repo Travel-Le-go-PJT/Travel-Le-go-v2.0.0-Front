@@ -1,37 +1,50 @@
 <template>
-    <div id="container">
-      <div>
-        <h1 id="title">어디로 떠나시나요?</h1>
-      </div>
-      <div id="header">
+  <div id="container">
+    <div>
+      <h1 id="title">어디로 떠나시나요?</h1>
+    </div>
+    <div id="header">
       <h6>가고 싶은 여행지를 검색해보세요!</h6>
       <div id="searchBox">
-        <b-form-input v-model="keyword"  type="text" ref="keyword" placeholder="검색어를 입력해주세요"
-          required>
+        <b-form-input v-model="keyword" type="text" ref="keyword" placeholder="검색어를 입력해주세요" required>
         </b-form-input>
         <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
       </div>
-       </div>
+    </div>
     <div class="row" id="board">
-      <template v-for="(location, index) in locations">
-        <location-item :location="location" :key="index"></location-item>
-      </template>
+      <div v-for="(location, index) in locations" :key="index" class="col-md-3 p-3" @click="openModal(location)">
+        <div class="card">
+          <img :src="makeImageName(location.image)" class="card-img-top" :alt="location.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ location.sidoName }}</h5>
+            <p class="card-text">{{ location.engName }}</p>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-  </template>
+    <b-modal v-model="isModalOpen" title="상세 정보">
+      <div v-if="selectedLocation">
+        <h5>{{ selectedLocation.sidoName }}</h5>
+        <img :src="selectedLocation.image" :alt="selectedLocation.title" style="max-width: 100%; margin-bottom: 1rem;" />
+        <p>{{ selectedLocation.description }}</p>
+      </div>
+    </b-modal>
+  </div>
+</template>
   
-  <script>
-  import http from "@/api/http.js";
-  import { mapState } from "vuex";
-  import LocationItem from "@/components/attraction/LocationItem.vue"
-  export default {
-    name: "AttractionView",
+<script>
+import http from "@/api/http.js";
+import { mapState } from "vuex";
+export default {
+  name: "AttractionView",
   components: {
-    LocationItem
+
   },
   data() {
     return {
-        locations: [],
+      locations: [],
+      selectedLocation: {},
+      isModalOpen: false,
     }
   },
   computed: {
@@ -39,45 +52,69 @@
   },
   created() {
     http.get("/attraction/sido")
-    .then(({data})=>{
+      .then(({ data }) => {
         this.locations = data;
-    })
+      })
   },
-  mounted(){
+  mounted() {
   },
   methods: {
+    openModal(location) {
+      console.log("asdad");
+      this.selectedLocation = location;
+      this.isModalOpen = true;
+    },
+    makeImageName(image) {
+      return image;
+    },
   }
 }
-  </script>
+</script>
   
-  <style scoped>
-  @font-face {
-    font-family: "KCC-Jeongbeom";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  #container {
-    padding: 20px;
-  }
-  
-  #title {
-    font-family: KCC-Jeongbeom;
-    color: #ff9900;
-    width: 600px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  #board{
+<style scoped>
+@font-face {
+  font-family: "KCC-Jeongbeom";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.card {
+  cursor: pointer;
+  box-shadow: 0 0 10px rgb(31, 38, 135, 0.2)
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.card-img-top {
+  object-fit: fill;
+  height: 300px;
+}
+
+#container {
+  padding: 20px;
+}
+
+#title {
+  font-family: KCC-Jeongbeom;
+  color: #ff9900;
+  width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#board {
   width: 70vw;
   margin: 0 auto;
 }
 
-#searchBox{
+#searchBox {
   margin: 0 auto;
   display: flex;
-  width:300px
+  width: 300px
 }
 
 #title {
@@ -87,4 +124,4 @@
   text-align: center;
   margin: 0 auto;
 }
-  </style>
+</style>
