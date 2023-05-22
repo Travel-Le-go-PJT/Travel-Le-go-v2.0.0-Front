@@ -43,11 +43,7 @@ const userStore = {
           if (data.message === "SUCCESS") {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
-            console.log(
-              "login success token created!!!! >> ",
-              accessToken,
-              refreshToken
-            );
+            console.log("login success token created!!!! >> ", accessToken, refreshToken);
             commit("SET_IS_LOGIN", true); //로그인했습니다.
             commit("SET_IS_LOGIN_ERROR", false); //로그인 에러는 없습니다.
             commit("SET_IS_VALID_TOKEN", true); //현재 토큰은 정상적인 토큰입니다.
@@ -97,10 +93,7 @@ const userStore = {
       );
     },
     async tokenRegeneration({ commit, state }) {
-      console.log(
-        "토큰 재발급 >> 기존 토큰 정보 : {}",
-        sessionStorage.getItem("access-token")
-      );
+      console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
       await tokenRegeneration(
         JSON.stringify(state.userInfo),
         ({ data }) => {
@@ -145,7 +138,9 @@ const userStore = {
         userId,
         ({ data }) => {
           if (data.message === "SUCCESS") {
+            console.log(userStore.isLogin);
             commit("SET_IS_LOGIN", false);
+            console.log(this.isLogin);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
           } else {
