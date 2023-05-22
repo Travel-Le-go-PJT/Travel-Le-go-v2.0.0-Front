@@ -4,20 +4,24 @@
       <h6>가고 싶은 여행지를 검색해보세요!</h6>
       <div id="searchBox">
         <b-form-input v-model="keyword"  type="text" ref="keyword" placeholder="검색어를 입력해주세요"
-          @keydown.enter="searchMap" required>
+          required>
         </b-form-input>
         <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
       </div>
       <b-button @click="write" class="btn-hover color-3 mt-4 mb-3">글쓰기</b-button>
+      <b-button @click="getAllPlans" class="btn-hover color-3 mt-4 mb-3 ml-2">전체 목록</b-button>
+      <b-button @click="getMyPlans" class="btn-hover color-3 mt-4 mb-3 ml-2">내 여행 보기</b-button>
+      <b-button @click="getFavoritePlans" class="btn-hover color-3 mt-4 mb-3 ml-2">내가 찜한 여행</b-button>
     </div>
     <div class="row" id="board">
-      <template v-for="(article, index) in articles">
-        <trip-plan-item :article="article" :key="index"></trip-plan-item>
+      <template v-for="(article) in articles">
+        <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
       </template>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import http from "@/api/http.js"
 import TripPlanItem from "@/components/tripplan/TripPlanItem.vue"
 export default {
@@ -31,20 +35,51 @@ export default {
       articles: [],
     }
   },
+  computed: {
+    ...mapState("userStore", ["userInfo"]),
+  },
   created() {
-    http.get('/tripPlanBoard/')
+    this.getAllPlans();
+  },
+  mounted(){
+    this.getAllPlans();
+  },
+  methods: {
+    write() {
+      this.$router.push("/tripplan/write");
+    },
+    getAllPlans(){
+      http.get('/tripPlanBoard/')
       .then(({ data }) => {
         this.articles = data;
       }).catch((error) => {
         console.log(error);
       });
-
-  },
-  methods: {
-    write() {
-      this.$router.push({ name: 'write', params: this.writeArticle });
     },
-  }
+    getMyPlans(){
+      http.get('/tripPlanBoard/',{
+        parmas: {
+          trip_plan_user_id: this.userInfo.userId
+        }
+      })
+      .then(({ data }) => {
+        this.articles = data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    getFavoritePlans(){
+      http
+      .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
+      .then(({ data }) => {
+        this.articles = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  },
+  
 
 }
 </script>
