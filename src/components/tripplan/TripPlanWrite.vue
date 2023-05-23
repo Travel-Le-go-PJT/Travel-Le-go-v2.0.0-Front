@@ -21,7 +21,7 @@
         <map-search-bar v-on:search="search"></map-search-bar>
         <b-row>
           <b-col cols="7" align="left" id="map">
-            <map-component :lists="results" :level="level" :selected="selected" :center="center" />
+            <map-component :level="level" :lists="results"  :selected="selected" :center="center" />
           </b-col>
           <b-col cols="5" id="searchedList">
             <map-list v-on:select="select" v-on:showCenter="showCenter" :lists="results" />

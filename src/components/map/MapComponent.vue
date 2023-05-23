@@ -168,7 +168,9 @@ export default {
   },
   watch: {
     lists() {
-      this.map.setLevel(this.level);
+      if(this.map!=undefined){
+        this.map.setLevel(this.level);
+      }
       this.makeMarker();
     },
     center() {
