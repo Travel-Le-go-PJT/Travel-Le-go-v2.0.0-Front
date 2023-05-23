@@ -5,7 +5,7 @@
     </b-col>
     <b-col class="sm-3">
       <select v-model="contentTypeId" id="searchContentId" class="custom-select" name="contentTypeId">
-        <option value="0" selected>관광지 유형</option>
+        <option value="0" selected>전체</option>
         <option value="12">관광지</option>
         <option value="14">문화시설</option>
         <option value="15">축제공연행사</option>
@@ -36,7 +36,7 @@ export default {
     return {
       sidoCode: null,
       contentTypeId: 0,
-      title: null,
+      title: "",
       sidos: [{ value: null, text: "지역 선택" }],
       searchResults: []
     };
@@ -45,6 +45,9 @@ export default {
 
   },
   created() {
+    if(this.$route.query.sidoCode != null){
+      this.sidoCode = this.$route.query.sidoCode
+    }
     http.get("/attraction/sido")
       .then(({ data }) => {
         data.forEach((sido) => {
@@ -54,6 +57,7 @@ export default {
       .catch(() => {
 
       })
+      this.searchMap();
   },
   methods: {
     searchMap() {
