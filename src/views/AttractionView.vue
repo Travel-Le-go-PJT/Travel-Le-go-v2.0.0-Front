@@ -77,7 +77,10 @@ export default {
       return image;
     },
     makePlan(){
-      this.$router.push("/tripplan/planwrite");
+      let searchData = {
+        sidoCode : this.selectedLocation.sidoCode
+      }
+      this.$router.push({ name: 'planwrite', query: searchData });
     }
   }
 }

@@ -45,6 +45,9 @@ export default {
 
   },
   created() {
+    if(this.$route.query.sidoCode != null){
+      this.sidoCode = this.$route.query.sidoCode
+    }
     http.get("/attraction/sido")
       .then(({ data }) => {
         data.forEach((sido) => {
@@ -54,6 +57,7 @@ export default {
       .catch(() => {
 
       })
+      this.searchMap();
   },
   methods: {
     searchMap() {
