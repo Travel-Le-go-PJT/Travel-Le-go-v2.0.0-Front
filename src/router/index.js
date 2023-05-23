@@ -72,6 +72,7 @@ const routes = [
     path: "/tripplan",
     name: "tripplan",
     component: TripPlanView,
+    beforeEnter: onlyAuthUser,
     redirect: "/tripplan/planlist",
     children: [
       {

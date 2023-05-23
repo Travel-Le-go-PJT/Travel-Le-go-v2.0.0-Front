@@ -13,11 +13,14 @@
                 </div>
             </template>
         </b-table>
-        <b-pagination pills size="sm" align="center" v-model="currentPage" :total-rows="rows" per-page="5"
-            aria-controls="tb"></b-pagination>
+        <b-pagination pills size="sm" align="center" v-model="currentPage" :total-rows="rows"
+            aria-controls="tb" :limit="10"></b-pagination>
 
         <b-modal id="attrationModal" v-model="isModalOpen" title="여행지 정보" size="lg" ok-only modal-class="customModal">
             <div>
+                <div class="d-flex justify-content-center">
+                    <img :src="selectedAttraction.image" class="modal-image" :alt="selectedAttraction.title">
+                </div>
                 <h2 class="modalTitle">{{ selectedAttraction.title }} </h2>
                 <div class="modalAddr">
                     {{ selectedAttraction.addr1 }}
@@ -28,6 +31,23 @@
                 </div>
             </div>
         </b-modal>
+        
+        <!-- <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
+      dialog-class="modal-dialog-centered">
+      <template #default="{ cancel }">
+        <div class="d-flex" style="top: 50%;">
+          <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
+            <img :src="selectedAttraction.image" class="modal-image" :alt="selectedAttraction.title">
+          </div>
+          <div class="modal-content-wrapper p-4" style="flex: 6;">
+            <h3>{{ selectedAttraction.title }}</h3>
+            <h6>{{ selectedAttraction.addr1 }}</h6>
+            <div v-html="selectedAttraction.description"></div>
+          </div>
+          <b-icon icon="x-lg" class="close-icon" @click="cancel"></b-icon>
+        </div>
+      </template>
+    </b-modal> -->
     </div>
 </template>
 <script>
@@ -87,5 +107,10 @@ export default {
 
 .listIcon:hover {
     cursor: pointer;
+}
+
+.modal-image{
+    width : 480px;
+    height : 270px;
 }
 </style>

@@ -29,11 +29,15 @@
           <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
             <img :src="selectedLocation.image" class="modal-image" :alt="selectedLocation.sidoName">
           </div>
-          <div class="modal-content-wrapper p-4" style="flex: 6;">
-            <h3>{{ selectedLocation.sidoName }}</h3>
-            <h6>{{ selectedLocation.engName }}</h6>
+          <div class="modal-content-wrapper p-4 d-flex flex-column justify-content-between" style="flex: 6;">
+            <div>
+              <h3>{{ selectedLocation.sidoName }}</h3>
+              <h6>{{ selectedLocation.engName }}</h6>
+            </div>
             <div v-html="selectedLocation.description"></div>
-            <b-button variant="primary" @click="makePlan">계획 만들기</b-button>
+            <div>
+              <b-button variant="primary" @click="makePlan" class="plan-button">계획 만들기</b-button>
+            </div>
           </div>
           <b-icon icon="x-lg" class="close-icon" @click="cancel"></b-icon>
         </div>
@@ -111,7 +115,8 @@ export default {
 
 .modal-image {
   object-fit: fill;
-  max-height: 420px;
+  width:420px;
+  height: 420px;
 }
 
 
@@ -124,6 +129,9 @@ export default {
   font-size: 20px;
 }
 
+.plan-button{
+  bottom:10px;
+}
 
 #container {
   padding: 20px;
