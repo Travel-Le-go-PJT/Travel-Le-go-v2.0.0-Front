@@ -21,7 +21,12 @@
                 required
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="아이디" label-for="userId" :state="idState">
+            <b-form-group
+              label="아이디"
+              label-for="userId"
+              description="아이디는 변경할 수 없어요! 
+              신중하게 정해주세요."
+            >
               <b-form-input
                 id="userId-input"
                 v-model="joinUser.userId"
@@ -39,7 +44,6 @@
               <b-form-input
                 id="userPwd"
                 v-model="joinUser.userPwd"
-                :state="pwdState"
                 type="password"
                 placeholder="비밀번호를 입력해주세요."
                 required

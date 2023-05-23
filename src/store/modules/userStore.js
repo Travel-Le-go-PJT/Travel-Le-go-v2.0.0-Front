@@ -152,6 +152,9 @@ const userStore = {
         }
       );
     },
+    async modifyuser({ commit }, userInfo) {
+      commit("SET_USER_INFO", userInfo);
+    },
   },
 };
 
