@@ -103,7 +103,7 @@ import store from "@/store";
 
 const userStore = "userStore";
 export default {
-  name: "UserInfoModify",
+  name: "AdminModifyUserInfo",
   components: {},
   computed: {
     ...mapState(userStore, ["userInfo"]),

@@ -44,23 +44,34 @@ const routes = [
       {
         path: "login",
         name: "login",
-        component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserLogin.vue"),
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "@/components/user/UserLogin.vue"
+          ),
       },
       {
         path: "join",
         name: "join",
-        component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserJoin.vue"),
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "@/components/user/UserJoin.vue"
+          ),
       },
       {
         path: "mypage",
         name: "mypage",
-        component: () => import(/* webpackChunkName: "user" */ "@/components/user/UserMyPage.vue"),
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "@/components/user/UserMyPage.vue"
+          ),
       },
       {
         path: "usermodify",
         name: "usermodify",
         component: () =>
-          import(/* webpackChunkName: "user" */ "@/components/user/UserInfoModify.vue"),
+          import(
+            /* webpackChunkName: "user" */ "@/components/user/UserInfoModify.vue"
+          ),
       },
     ],
   },
@@ -73,13 +84,25 @@ const routes = [
         path: "userlist",
         name: "userlist",
         component: () =>
-          import(/* webpackChunkName: "admin" */ "@/components/user/admin/UserList.vue"),
+          import(
+            /* webpackChunkName: "admin" */ "@/components/user/admin/AdminUserList.vue"
+          ),
       },
       {
-        path: "userdetail",
-        name: "userdetail",
+        path: "userarticlelist/:userId",
+        name: "userarticlelist",
         component: () =>
-          import(/* webpackChunkName: "admin" */ "@/components/user/admin/UserDetail.vue"),
+          import(
+            /* webpackChunkName: "admin" */ "@/components/user/admin/AdminUserArticles.vue"
+          ),
+      },
+      {
+        path: "adminmodify",
+        name: "adminmodify",
+        component: () =>
+          import(
+            /* webpackChunkName: "admin" */ "@/components/user/admin/AdminModifyUserInfo.vue"
+          ),
       },
     ],
   },
@@ -99,26 +122,34 @@ const routes = [
         path: "planlist",
         name: "planlist",
         component: () =>
-          import(/* webpackChunkName: "board" */ "@/components/tripplan/TripPlanList"),
+          import(
+            /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanList"
+          ),
       },
       {
         path: "planwrite",
         name: "planwrite",
         beforeEnter: onlyAuthUser,
         component: () =>
-          import(/* webpackChunkName: "board" */ "@/components/tripplan/TripPlanWrite"),
+          import(
+            /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanWrite"
+          ),
       },
       {
         path: "plandetail/:articleNo",
         name: "plandetail",
         component: () =>
-          import(/* webpackChunkName: "board" */ "@/components/tripplan/TripPlanDetail"),
+          import(
+            /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanDetail"
+          ),
       },
       {
         path: "planmodify/:articleNo",
         name: "planmodify",
         component: () =>
-          import(/* webpackChunkName: "board" */ "@/components/tripplan/TripPlanModify"),
+          import(
+            /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanModify"
+          ),
       },
       // {
       //   path: "delete/:articleno",
@@ -131,14 +162,17 @@ const routes = [
     path: "/tripinfo",
     name: "tripinfo",
     beforeEnter: onlyAuthUser,
-    component: () => import(/* webpackChunkName: "tripinfo" */ "../views/TripInfoView.vue"),
+    component: () =>
+      import(/* webpackChunkName: "tripinfo" */ "../views/TripInfoView.vue"),
     redirect: "/tripinfo/infolist",
     children: [
       {
         path: "infolist",
         name: "infolist",
         component: () =>
-          import(/* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardList.vue"),
+          import(
+            /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardList.vue"
+          ),
       },
       {
         path: "infodetail/:articleNo",
@@ -152,7 +186,9 @@ const routes = [
         path: "infowrite",
         name: "infowrite",
         component: () =>
-          import(/* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardWrite.vue"),
+          import(
+            /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardWrite.vue"
+          ),
       },
       {
         path: "infomodify/:articleNo",

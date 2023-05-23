@@ -1,47 +1,44 @@
 <template>
   <tr striped hover>
-    <td v-text="user.userName" @click="showUser(user.userId)"></td>
-    <td v-text="user.userId" @click="showUser(user.userId)"></td>
-    <td v-text="user.joinDate" @click="showUser(user.userId)"></td>
-    <td @click="showUser(user.userId)">{{ user.emailId }}@{{ user.emailDomain }}</td>
-    <td v-text="count" @click="showUser(user.userId)"></td>
+    <td v-text="category"></td>
+    <td v-text="article.articleNo"></td>
+    <td v-text="article.subject"></td>
     <td>
-      <button type="submit" class="btn-hover color-3" @click="deleteitem(article.articleNo)">게시글 보기</button>
-    </td>
-    <td>
-      <button type="submit" class="btn-hover color-3" @click="deleteitem(article.articleNo)">수정하기</button>
+      <button
+        type="submit"
+        class="btn-hover color-3"
+        @click="movepage(article.articleNo)"
+      >
+        자세히보기
+      </button>
     </td>
   </tr>
 </template>
 
 <script>
-import http from "@/api/http.js";
 export default {
-  name: "UserInfoItem",
+  name: "AdminUserArticleItem",
   props: {
-    user: {},
+    article: {},
+    category: String,
   },
   data() {
-    return {
-      count: 0,
-    };
+    return {};
   },
-  created() {
-    this.getCount();
-  },
+  created() {},
   methods: {
-    getCount() {
-      http
-        .get(`/user/count/${this.user.userId}`)
-        .then(({ data }) => {
-          console.log("[사용자 글 개수]");
-          console.log(data);
-          this.count = data;
-        })
-        .catch((error) => {
-          console.log("[사용자 글 개수 에러]");
-          console.log(error);
-        });
+    movepage(no) {
+      if (this.category == "Plan") {
+        this.movePlanDetailpage(no);
+      } else {
+        this.moveInfoDetailpage(no);
+      }
+    },
+    movePlanDetailpage(no) {
+      this.$router.push(`/tripplan/plandetail/${no}`);
+    },
+    moveInfoDetailpage(no) {
+      this.$router.push(`/tripinfo/infodetail/${no}`);
     },
   },
 };
