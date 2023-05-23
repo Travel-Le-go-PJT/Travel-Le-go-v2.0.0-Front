@@ -21,9 +21,9 @@
         <div class="row">
             <div class="col-12">
                 <b-button class="btn-hover color-3" @click="moveList"> 글 목록</b-button>
-                <b-button class="btn-hover color-3" v-if="userInfo.userId === article.userId"
+                <b-button class="btn-hover color-3" v-if="userInfo!=null || userInfo.userId === article.userId"
                     @click="removeArticle(localArticle.articleNo)">글 삭제하기</b-button>
-                <b-button class="btn-hover color-3" v-if="userInfo.userId === article.userId"
+                <b-button class="btn-hover color-3" v-if="userInfo!=null || userInfo.userId === article.userId"
                     @click="moveModify(localArticle.articleNo)">글 수정하기</b-button>
             </div>
         </div>

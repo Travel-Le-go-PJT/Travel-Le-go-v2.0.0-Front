@@ -109,7 +109,7 @@ export default {
 }
 
 .card-img-top {
-  object-fit: fill;
+  object-fit: cover;
   height: 300px;
 }
 
