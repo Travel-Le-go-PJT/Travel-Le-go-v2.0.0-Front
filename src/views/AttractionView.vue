@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <b-modal v-model="isModalOpen" hide-header hide-footer size="lg" body-class="p-0"
+    <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
       dialog-class="modal-dialog-centered">
       <template #default="{ cancel }">
         <div class="d-flex" style="top: 50%;">
@@ -32,8 +32,8 @@
           <div class="modal-content-wrapper p-4" style="flex: 6;">
             <h3>{{ selectedLocation.sidoName }}</h3>
             <h6>{{ selectedLocation.engName }}</h6>
-            <p>{{ selectedLocation.description }}</p>
-            <b-button variant="primary">일정 만들기</b-button>
+            <div v-html="selectedLocation.description"></div>
+            <b-button variant="primary" @click="makePlan">계획 만들기</b-button>
           </div>
           <b-icon icon="x-lg" class="close-icon" @click="cancel"></b-icon>
         </div>
@@ -76,7 +76,9 @@ export default {
     makeImageName(image) {
       return image;
     },
-
+    makePlan(){
+      this.$router.push("/tripplan/planwrite");
+    }
   }
 }
 </script>
@@ -106,7 +108,7 @@ export default {
 
 .modal-image {
   object-fit: fill;
-  max-width: 300px
+  max-height: 420px;
 }
 
 
