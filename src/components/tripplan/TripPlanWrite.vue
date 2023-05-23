@@ -21,7 +21,7 @@
         <map-search-bar v-on:search="search"></map-search-bar>
         <b-row>
           <b-col cols="7" align="left" id="map">
-            <map-component :lists="results" :level="6" :selected="selected" :center="center" />
+            <map-component :lists="results" :level="level" :selected="selected" :center="center" />
           </b-col>
           <b-col cols="5" id="searchedList">
             <map-list v-on:select="select" v-on:showCenter="showCenter" :lists="results" />
@@ -61,6 +61,7 @@ export default {
         content: "",
       },
       center: null,
+      level:7
     }
   },
   created() {
@@ -76,6 +77,7 @@ export default {
           if (status == 204) {
             this.results = [];
           } else {
+            this.level=7;
             this.results = data;
           }
         })
@@ -125,6 +127,7 @@ export default {
       this.selected = selected;
     },
     showCenter(attraction) {
+      this.level=3;
       this.center = attraction;
     },
     reorder(newSelected) {

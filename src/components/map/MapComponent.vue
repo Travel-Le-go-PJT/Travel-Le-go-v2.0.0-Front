@@ -165,16 +165,17 @@ export default {
   },
   watch: {
     lists() {
+      this.map.setLevel(this.level);
       this.makeMarker();
     },
     center() {
       if (this.center != null) {
         this.map.setCenter(new window.kakao.maps.LatLng(this.center.latitude, this.center.longitude));
+        this.map.setLevel(this.level);
       }
     },
     selected() {
       if (this.map != null) {
-        console.log("cccc")
         this.changeSelected();
       }
     }
