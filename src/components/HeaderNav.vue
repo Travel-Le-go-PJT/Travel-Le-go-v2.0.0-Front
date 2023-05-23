@@ -40,7 +40,7 @@
               <router-link :to="{ name: 'mypage' }" class="link align-self-center">마이페이지</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#" v-else>
-              <router-link :to="{ name: 'userManagement' }" class="link align-self-center">회원관리</router-link>
+              <router-link :to="{ name: 'userlist' }" class="link align-self-center">회원관리</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
