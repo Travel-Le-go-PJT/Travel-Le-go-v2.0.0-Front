@@ -1,29 +1,39 @@
 <template>
   <div class="boardList">
-    <h1 id="title"></h1>
+    <h1 id="title">{{ this.userId }}가 작성한 글</h1>
     <div>
       <table id="book-list">
         <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 10%" />
-          <col style="width: 15%" />
-          <col style="width: 15%" />
-          <col style="width: 5%" />
+          <col style="width: 20%" />
+          <col style="width: 20%" />
+          <col style="width: 80%" />
+          <col style="width: 20%" />
         </colgroup>
         <thead>
           <tr>
-            <th>이름</th>
-            <th>아이디</th>
-            <th>가입일</th>
-            <th>이메일</th>
-            <th>작성글 개수</th>
+            <th>구분</th>
+            <th>글번호</th>
+            <th>제목</th>
             <th>작성글 보기</th>
-            <th>수정하기</th>
           </tr>
         </thead>
         <tbody id="item">
-          <template v-for="(user, count, index) in users">
-            <user-info-item :user="user" :index="index" :key="user.userId"></user-info-item>
+          <template v-for="(plan, index) in plans">
+            <admin-user-article-item
+              :article="plan"
+              :index="index"
+              :category="categoryPlan"
+              :key="plan.articleNo"
+            ></admin-user-article-item>
+          </template>
+
+          <template v-for="(info, index) in infos">
+            <admin-user-article-item
+              :article="info"
+              :index="index"
+              :category="categoryInfo"
+              :key="info.articleNo"
+            ></admin-user-article-item>
           </template>
         </tbody>
       </table>
@@ -33,30 +43,67 @@
 
 <script>
 import http from "@/api/http.js";
-import UserInfoItem from "@/components/user/admin/UserInfoItem.vue";
+import AdminUserArticleItem from "@/components/user/admin/AdminUserArticleItem.vue";
 export default {
-  name: "UserList",
-  components: { UserInfoItem },
+  name: "AdminUserArticles",
+  components: { AdminUserArticleItem },
   data() {
     return {
-      users: [],
-      user: {},
+      plans: [],
+      infos: [],
+      plan: {},
+      info: {},
+      categoryPlan: String,
+      categoryInfo: String,
+      userId: String,
     };
   },
   created() {
-    this.userlist();
+    let userId = this.$route.params.userId;
+    this.articleList(userId);
+    console.log(userId);
   },
   methods: {
-    userlist() {
+    articleList(userId) {
+      this.userId = userId;
+      this.getPlan(userId);
+      this.getInfo(userId);
+    },
+
+    getPlan(userId) {
+      this.categoryPlan = "Plan";
+      let myData = {
+        key: "trip_plan_user_id",
+        word: userId,
+      };
       http
-        .get("/user")
+        .get("/tripPlanBoard/", {
+          params: myData,
+        })
         .then(({ data }) => {
-          console.log("[사용자 정보 리스트]");
-          console.log(data);
-          this.users = data;
+          this.plans = data;
+          console.log(this.plans);
         })
         .catch((error) => {
-          console.log("[사용자 정보 리스트 에러]");
+          console.log(error);
+        });
+    },
+
+    getInfo(userId) {
+      this.categoryInfo = "Info";
+      let myData = {
+        key: "trip_info_user_id",
+        word: userId,
+      };
+      http
+        .get("/tripInfoBoard/", {
+          params: myData,
+        })
+        .then(({ data }) => {
+          this.infos = data;
+          console.log(this.infos);
+        })
+        .catch((error) => {
           console.log(error);
         });
     },

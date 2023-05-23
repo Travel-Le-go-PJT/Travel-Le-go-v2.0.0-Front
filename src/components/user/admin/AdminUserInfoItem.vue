@@ -1,15 +1,27 @@
 <template>
   <tr striped hover>
-    <td v-text="user.userName" @click="showUser(user.userId)"></td>
-    <td v-text="user.userId" @click="showUser(user.userId)"></td>
-    <td v-text="user.joinDate" @click="showUser(user.userId)"></td>
-    <td @click="showUser(user.userId)">{{ user.emailId }}@{{ user.emailDomain }}</td>
-    <td v-text="count" @click="showUser(user.userId)"></td>
+    <td v-text="user.userName"></td>
+    <td v-text="user.userId"></td>
+    <td v-text="user.joinDate"></td>
+    <td>{{ user.emailId }}@{{ user.emailDomain }}</td>
+    <td v-text="count"></td>
     <td>
-      <button type="submit" class="btn-hover color-3" @click="deleteitem(article.articleNo)">게시글 보기</button>
+      <button
+        type="submit"
+        class="btn-hover color-3"
+        @click="getUserArticle(user.userId)"
+      >
+        작성글 보기
+      </button>
     </td>
     <td>
-      <button type="submit" class="btn-hover color-3" @click="deleteitem(article.articleNo)">수정하기</button>
+      <button
+        type="submit"
+        class="btn-hover color-3"
+        @click="adminModifyUserInfo(user.userId)"
+      >
+        수정하기
+      </button>
     </td>
   </tr>
 </template>
@@ -17,7 +29,7 @@
 <script>
 import http from "@/api/http.js";
 export default {
-  name: "UserInfoItem",
+  name: "AdminUserInfoItem",
   props: {
     user: {},
   },
@@ -42,6 +54,14 @@ export default {
           console.log("[사용자 글 개수 에러]");
           console.log(error);
         });
+    },
+    getUserArticle(userId) {
+      console.log(userId + "가 작성한 글 보기");
+      this.$router.push(`/admin/userarticlelist/${userId}`);
+    },
+    adminModifyUserInfo(userId) {
+      console.log(userId + "정보 수정하기");
+      this.$router.push(`/user/usermodify/${userId}`);
     },
   },
 };
