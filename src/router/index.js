@@ -4,6 +4,7 @@ import HomeView from "@/views/HomeView.vue";
 import AttractionView from "@/views/AttractionView.vue";
 import TripPlanView from "@/views/TripPlanView.vue";
 import UserView from "@/views/UserView.vue";
+import AdminView from "@/views/AdminView.vue";
 import store from "@/store";
 
 Vue.use(VueRouter);
@@ -60,6 +61,25 @@ const routes = [
         name: "usermodify",
         component: () =>
           import(/* webpackChunkName: "user" */ "@/components/user/UserInfoModify.vue"),
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminView,
+    children: [
+      {
+        path: "userlist",
+        name: "userlist",
+        component: () =>
+          import(/* webpackChunkName: "admin" */ "@/components/user/admin/UserList.vue"),
+      },
+      {
+        path: "userdetail",
+        name: "userdetail",
+        component: () =>
+          import(/* webpackChunkName: "admin" */ "@/components/user/admin/UserDetail.vue"),
       },
     ],
   },

@@ -68,7 +68,11 @@
             >-->
 
             <b-button type="button" variant="primary" @click="modify">저장하기</b-button>
-            <!-- <b-button type="button" variant="danger" @click = >초기화</b-button> -->
+            <b-button
+              type="button"
+              variant="danger"
+              @click="this.$router.push(`/tripinfo/infodetail/${no}`);"
+            >초기화</b-button>
           </b-form>
         </b-card>
       </b-col>
