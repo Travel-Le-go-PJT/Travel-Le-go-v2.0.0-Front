@@ -61,7 +61,7 @@ export default {
     },
     adminModifyUserInfo(userId) {
       console.log(userId + "정보 수정하기");
-      this.$router.push(`/admin/adminmodify/${userId}`);
+      this.$router.push(`/user/usermodify/${userId}`);
     },
   },
 };

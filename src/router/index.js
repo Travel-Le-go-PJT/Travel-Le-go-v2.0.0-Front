@@ -66,7 +66,7 @@ const routes = [
           ),
       },
       {
-        path: "usermodify",
+        path: "usermodify/:userId",
         name: "usermodify",
         component: () =>
           import(
@@ -94,14 +94,6 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "admin" */ "@/components/user/admin/AdminUserArticles.vue"
-          ),
-      },
-      {
-        path: "adminmodify",
-        name: "adminmodify",
-        component: () =>
-          import(
-            /* webpackChunkName: "admin" */ "@/components/user/admin/AdminModifyUserInfo.vue"
           ),
       },
     ],

@@ -3,7 +3,10 @@
     <b-row>
       <b-col>
         <b-alert variant="secondary" show>
-          <h3>내 정보 수정하기</h3>
+          <h3 v-if="isAdmin">
+            {{ user.userId }}({{ user.userName }}) 사용자 정보 수정하기
+          </h3>
+          <h3 v-else>내 정보 수정하기</h3>
         </b-alert>
       </b-col>
     </b-row>
@@ -14,7 +17,7 @@
             <b-form-group label="이름" label-for="userName">
               <b-form-input
                 id="userName"
-                v-model="userInfo.userName"
+                v-model="user.userName"
                 type="text"
                 required
               ></b-form-input>
@@ -26,7 +29,7 @@
             >
               <b-form-input
                 id="userId-input"
-                v-model="userInfo.userId"
+                v-model="user.userId"
                 type="text"
                 readonly
               ></b-form-input>
@@ -34,7 +37,7 @@
             <b-form-group label="비밀번호" label-for="userPwd">
               <b-form-input
                 id="userPwd"
-                v-model="userInfo.userPwd"
+                v-model="user.userPwd"
                 type="password"
                 placeholder="비밀번호를 입력해주세요."
                 required
@@ -48,7 +51,7 @@
             >
               <b-form-input
                 id="input-1"
-                v-model="userInfo.userName"
+                v-model="user.userName"
                 type="email"
                 placeholder="Enter email"
                 required
@@ -57,7 +60,7 @@
             <label for="emailId" class="form-label">이메일</label>
             <div class="d-flex justify-content-between">
               <input
-                v-model="userInfo.emailId"
+                v-model="user.emailId"
                 style="width: 40%"
                 type="text"
                 class="form-control"
@@ -67,7 +70,7 @@
               />
               <p class="text-center">@</p>
               <select
-                v-model="userInfo.emailDomain"
+                v-model="user.emailDomain"
                 style="width: 50%"
                 id="emailDomain"
                 name="emailDomain"
@@ -87,7 +90,7 @@
             <b-button
               type="button"
               variant="danger"
-              @click="this.$router.push(`/tripinfo/infodetail/${no}`)"
+              @click="getUserInfo(user.userId)"
               >초기화</b-button
             >
           </b-form>
@@ -97,7 +100,7 @@
   </b-container>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import http from "@/api/http";
 import store from "@/store";
 
@@ -111,29 +114,59 @@ export default {
   data() {
     return {
       show: true,
+      user: {},
+      isAdmin: Boolean,
     };
   },
+  created() {
+    let userId = this.$route.params.userId;
+    this.isAdmin = false;
+    if (userId == null) {
+      this.getUserInfo(this.userInfo.userId);
+    } else {
+      this.getUserInfo(userId);
+      this.isAdmin = true;
+    }
+  },
   methods: {
-    ...mapActions(userStore, ["userLogout"]),
+    getUserInfo(userId) {
+      http
+        .get(`/user/${userId}`)
+        .then(({ data }) => {
+          console.log("[user 정보 받아오기 getUserInfo]");
+          console.log(data);
+          this.user = data;
+        })
+        .catch((error) => {
+          console.log("[user 정보 받아오기 getUserInfo에러]");
+          console.log(error);
+        });
+    },
     modify() {
       http
         .put("/user", {
-          userId: this.userInfo.userId,
-          userName: this.userInfo.userName,
-          userPwd: this.userInfo.userPwd,
-          emailId: this.userInfo.emailId,
-          emailDomain: this.userInfo.emailDomain,
+          userId: this.user.userId,
+          userName: this.user.userName,
+          userPwd: this.user.userPwd,
+          emailId: this.user.emailId,
+          emailDomain: this.user.emailDomain,
         })
         .then(({ data }) => {
           console.log(data);
-          store.dispatch("userStore/modifyuser", data.userInfo);
-          this.$router.push({ name: "mypage" });
+          console.log(this.isAdmin);
+          if (this.isAdmin) {
+            this.$router.push({ name: "userlist" });
+          } else {
+            store.dispatch("userStore/modifyuser", data.userInfo);
+            this.$router.push({ name: "mypage" });
+          }
         })
         .catch((error) => {
           console.log("[사용자 정보 수정 에러]");
           console.log(error);
         });
     },
+    reset() {},
   },
 };
 </script>
