@@ -76,6 +76,9 @@ export default {
             this.$router.push(`/tripplan/planmodify/${no}`);
         },
         favorite(no) {
+            if(this.userInfo==null){
+                return;
+            }
             let myData = {
                 articleNo: no,
                 userId: this.userInfo.userId

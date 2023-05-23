@@ -1,27 +1,27 @@
 <template>
   <div>
-
-    <table id="book-detail">
-      <tr>
-        <th>제목</th>
-        <td><input type="text" v-model="article.subject" id="subject" ref="subject" /></td>
-      </tr>
-      <tr>
-        <th>내용</th>
-        <td><textarea rows="5" cols="50" v-model="article.content" id="content" ref="content"></textarea></td>
-      </tr>
-    </table>
     <b-row>
-      <b-col></b-col>
-      <b-col cols="3" id="myPlan"><plan-area v-on:delete="deleteItem" :selected="selected"></plan-area></b-col>
-      <b-col cols="7">
+      <b-col cols="3" id="selectedList">
+        <form ref="writeForm" @submit.prevent="write">
+          <b-form-group label="여행 제목" label-for="subject" invalid-feedback="제목을 입력해주세요.">
+            <b-form-input id="subject" v-model="article.subject" ref="subject" required></b-form-input>
+          </b-form-group>
+          <b-form-group label="설명" label-for="content" invalid-feedback="내용을 입력해주세요.">
+            <b-form-textarea rows="5" id="content" v-model="article.content" ref="content"
+              required></b-form-textarea>
+          </b-form-group>
+        </form>
+        <plan-area v-on:delete="deleteItem" v-on:reorder="reorder" :selected="selected"
+        ></plan-area>
+      </b-col>
+      <b-col cols="9">
         <map-search-bar v-on:search="search"></map-search-bar>
         <b-row>
-          <b-col cols="7" align="left">
-            <map-component :lists="results" :level="10" :selected="selected" />
+          <b-col cols="7" align="left" id="map">
+            <map-component :lists="results" :level="level" :selected="selected" :center="center" />
           </b-col>
-          <b-col cols="5">
-            <map-list v-on:select="select" :lists="results" />
+          <b-col cols="5" id="searchedList">
+            <map-list v-on:select="select" v-on:showCenter="showCenter" :lists="results" />
           </b-col>
         </b-row>
       </b-col>
@@ -40,8 +40,9 @@
 import http from "@/api/http";
 import MapSearchBar from "@/components/map/MapSearchBar.vue";
 import MapComponent from "@/components/map/MapComponent.vue";
-import MapList from '@/components/map/MapListForPlan.vue';
+import MapList from '@/components/map/MapList.vue';
 import PlanArea from '@/components/tripplan/PlanArea.vue';
+import { mapState } from "vuex";
 export default {
   name: "TripPlanModify",
   components: {
@@ -55,12 +56,17 @@ export default {
       results: [],
       selected: [],
       planNums: [],
-      article: {}
+      article: {},
+      center: null,
+      level:10
     }
   },
   created() {
     let no = this.$route.params.articleNo;
     this.getArticle(no);
+  },
+  computed: {
+    ...mapState("userStore", ["userInfo"]),
   },
   methods: {
     getArticle(no) {
@@ -76,7 +82,7 @@ export default {
         });
     },
     getArticleInfos() {
-
+      console.log("QDWDA");
       const promises = this.planNums.map((p) => {
         return http.get(`/attraction/${p}`)
           .then(({ data }) => data)
@@ -99,6 +105,7 @@ export default {
           if (status == 204) {
             this.results = [];
           } else {
+            this.level=10;
             this.results = data;
           }
         })
@@ -115,7 +122,11 @@ export default {
     modify() {
       let err = true;
       let msg = "";
-      if (!this.article.subject && err) {
+      if (this.article.userId != this.userInfo.userId || this.userInfo.userId==null) {
+        alert("권한이 없습니다..");
+        this.$router.push("/");
+        return;
+      } else if (!this.article.subject && err) {
         msg = "제목을 입력해주세요";
         err = false;
         this.$refs.article.subject.focus();
@@ -145,6 +156,13 @@ export default {
     },
     cancel() {
       this.$router.push(`/tripplan/plandetail/${this.article.articleNo}`);
+    },
+    showCenter(attraction) {
+      this.level=3;
+      this.center = attraction;
+    },
+    reorder(newSelected) {
+      this.selected = newSelected;
     }
   }
 }
@@ -154,6 +172,19 @@ export default {
 #myPlan {
   max-height: 700px;
   overflow-y: auto
+}
+
+#map {
+  height: 70vh;
+}
+
+#searchedList {
+  height: 70vh;
+}
+
+#selectedList {
+  height: 75.6vh;
+  overflow-y: auto;
 }
 
 input {

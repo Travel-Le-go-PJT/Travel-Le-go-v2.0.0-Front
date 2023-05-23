@@ -59,7 +59,6 @@ export default {
         },
         getAttractionInfos() {
             const promises = this.planNums.map((p) => {
-                console.log(p);
                 return http
                     .get(`/attraction/${p}`)
                     .then(({ data }) => data)
@@ -68,7 +67,6 @@ export default {
 
             Promise.all(promises)
                 .then((results) => {
-                    console.log(results)
                     results.forEach((data) => {
                         this.selected.push(data);
                     });

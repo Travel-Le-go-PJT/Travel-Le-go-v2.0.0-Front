@@ -34,7 +34,10 @@ export default {
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=9e1a14c977569ffe807b98813ba7a82e&libraries=services,clusterer,drawing&autoload=false";
-      script.onload = () => window.kakao.maps.load(this.loadMap);
+      script.onload = () => {
+        window.kakao.maps.load(this.loadMap);
+        this.$emit('loadDone');
+      }
       document.head.appendChild(script);
     },
     loadMap() {

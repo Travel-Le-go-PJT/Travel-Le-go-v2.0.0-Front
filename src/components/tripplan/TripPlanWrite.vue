@@ -91,10 +91,11 @@ export default {
     write() {
       let err = true;
       let msg = "";
-      if (this.writeArticle.userId == "") {
+      if (this.userInfo == null) {
         alert("로그인이 필요한 페이지입니다..");
         err = false;
         this.$router.push({ name: "login" });
+        return;
       } else if (!this.writeArticle.subject.trim() && err) {
         msg = "제목을 입력해주세요";
         err = false;
