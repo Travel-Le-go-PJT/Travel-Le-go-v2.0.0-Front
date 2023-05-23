@@ -1,10 +1,36 @@
 <template>
   <div>
+    <div>
+      <nav class="navbar fixed-top navbar-light bg-light">
+        <div class="container-fluid">
+          <b-navbar-brand href="#">
+            <router-link to="/">
+              <b-img
+                :src="require('@/assets/logo/Travel_Le_go_logo.jpg')"
+                id="logo"
+                class="d-inline-block align-top"
+                alt="logo"
+              ></b-img>
+            </router-link>
+          </b-navbar-brand>
+
+          <router-link :to="{ name: 'attraction' }" class="m-2 link">
+            <b-icon icon="map" font-scale="2"></b-icon>지역별여행지
+          </router-link>
+          <router-link :to="{ name: 'tripplan' }" class="m-2 link">
+            <b-icon icon="instagram" font-scale="2"></b-icon>나의여행계획
+          </router-link>
+          <router-link :to="{ name: 'tripinfo' }" class="m-2 link">
+            <b-icon icon="house-fill" font-scale="2"></b-icon>여행정보공유
+          </router-link>
+        </div>
+      </nav>
+    </div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-img
-            :src="require('@/assets/ssafy_logo.png')"
+            :src="require('@/assets/logo/Travel_Le_go_logo.jpg')"
             id="logo"
             class="d-inline-block align-top"
             alt="logo"
