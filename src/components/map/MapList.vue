@@ -35,22 +35,6 @@
       </template>
     </b-modal>
         
-        <!-- <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
-      dialog-class="modal-dialog-centered">
-      <template #default="{ cancel }">
-        <div class="d-flex" style="top: 50%;">
-          <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
-            <img :src="selectedAttraction.image" class="modal-image" :alt="selectedAttraction.title">
-          </div>
-          <div class="modal-content-wrapper p-4" style="flex: 6;">
-            <h3>{{ selectedAttraction.title }}</h3>
-            <h6>{{ selectedAttraction.addr1 }}</h6>
-            <div v-html="selectedAttraction.description"></div>
-          </div>
-          <b-icon icon="x-lg" class="close-icon" @click="cancel"></b-icon>
-        </div>
-      </template>
-    </b-modal> -->
     </div>
 </template>
 <script>

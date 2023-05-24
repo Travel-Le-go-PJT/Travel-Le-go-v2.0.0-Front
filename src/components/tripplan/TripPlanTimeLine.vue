@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline-container">
+  <div class="timeline-container" ref="container">
     <h3>여행 코스</h3>
     <div class="timeline">
       <div
@@ -20,8 +20,8 @@
             <div class="p-2">
               <b-button
                 @click="openModal(attraction)"
-                type="button"
-                class="btn-hover color-3"
+                variant="primary"
+                class="mbtn"
                 >자세히보기</b-button
               >
             </div>
@@ -38,7 +38,7 @@
           dialog-class="modal-dialog-centered"
         >
           <template #default="{ cancel }">
-            <div class="d-flex" style="top: 50%; height: 420px">
+            <div class="d-flex dmodal" style="top: 50%; height: 420px">
               <div class="modal-image-wrapper" style="flex: 4; padding: 0">
                 <img
                   :src="selectedAttraction.image"
@@ -84,6 +84,7 @@ export default {
     openModal(attraction) {
       this.selectedAttraction = attraction;
       this.isModalOpen = true;
+      this.$refs.container.focus();
     },
   },
 };
@@ -91,6 +92,7 @@ export default {
 
 <style>
 .timeline-container {
+  font-family: omyu_pretty;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -167,5 +169,22 @@ export default {
 
 .customModal {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dmodal{
+  font-family: omyu_pretty;
+  font-size: 18px;
+}
+
+.mbtn{
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
+}
+.mbtn:hover{
+  background-color: #3477b9;
+  border-color: #2790f9;
+  color: #fff;
+  box-shadow: 0 0 5px 0 rgba(76, 74, 77, 0.8);
 }
 </style>

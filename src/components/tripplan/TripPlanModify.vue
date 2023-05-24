@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div id="modify-container">
     <b-row>
       <b-col cols="3" id="selectedList">
-        <form ref="writeForm" @submit.prevent="write">
+        <form class="modify-form" ref="writeForm" @submit.prevent="write">
           <b-form-group label="여행 제목" label-for="subject" invalid-feedback="제목을 입력해주세요.">
             <b-form-input id="subject" v-model="article.subject" ref="subject" required></b-form-input>
           </b-form-group>
@@ -28,10 +28,10 @@
       <b-col></b-col>
     </b-row>
     <div class="m-4">
-      <b-button type="button" variant="primary" class="btn-hover color-3" @click="modify">수정 완료</b-button>
-      <b-button type="button" variant="secondary" class="btn-hover color-3"
+      <b-button type="button" variant="primary" class="mr-2" @click="modify">수정 완료</b-button>
+      <b-button type="button" variant="outline-danger" class="mr-2" style="box-shadow: none; "
         @click="getArticle(article.articleNo)">초기화</b-button>
-      <b-button type="button" variant="danger" class="btn-hover color-3" @click="cancel">취소</b-button>
+      <b-button type="button" variant="danger" class="" @click="cancel">취소</b-button>
     </div>
   </div>
 </template>
@@ -158,7 +158,7 @@ export default {
       this.$router.push(`/tripplan/plandetail/${this.article.articleNo}`);
     },
     showCenter(attraction) {
-      this.level=3;
+      this.level=5;
       this.center = attraction;
     },
     reorder(newSelected) {
@@ -169,6 +169,11 @@ export default {
 </script>
   
 <style scoped>
+
+#modify-container{
+  font-family:omyu_pretty;
+  font-size:20px;
+}
 #myPlan {
   max-height: 700px;
   overflow-y: auto
@@ -187,122 +192,11 @@ export default {
   overflow-y: auto;
 }
 
-input {
-  border: none;
-  width: 100%;
-  height: 20px;
-}
-
-.hello {
-  font-family: Pretendard;
-}
-
-#book-detail {
-  margin: auto;
-  width: 70%;
-  border-collapse: collapse;
-}
-
-#book-detail tr th {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-}
-
-#book-detail tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fffeed;
-}
-
-#book-detail tr:nth-child(odd):not(:first-child) {
-  background-color: #fffeed;
-}
-
-#book-detail td:first-child {
-  margin-top: 0.5em;
-}
-
-#book-detail td:last-child {
-  margin-bottom: 0.5em;
-}
-
-#book-detail td:before {
-  font-weight: bold;
-  width: 120px;
-  display: inline-block;
-  color: #000;
-}
-
-#book-detail th,
-#book-detail td {
-  text-align: center;
-}
-
-#book-detail {
-  color: #333;
-  border-radius: 0.4em;
-  overflow: hidden;
-}
-
-#book-detail tr {
-  border-color: #bfbfbf;
-}
-
-#book-detail th,
-#book-detail td {
-  padding: 0.5em 2em;
-}
-
-textarea {
-  font-family: Pretendard;
-  width: 100%;
-  height: 200px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: solid 2px #fffeed;
-  border-radius: 5px;
-  font-size: 16px;
-  resize: both;
-}
-
-.btn-hover {
-  width: 100px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  margin: 20px;
-  height: max-content + 10px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  padding: 10px 0px;
+.modify-form{
   border-radius: 10px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}
-
-.btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}
-
-.btn-hover:focus {
-  outline: none;
-}
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(to right,
-      #f3f04f,
-      #ffb34f,
-      #b6d66b,
-      #bad737);
-  box-shadow: 0 4px 15px 0 rgba(145, 79, 68, 0.75);
+    background-color: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 </style>

@@ -3,37 +3,71 @@
     <div id="header">
       <h6>가고 싶은 여행지를 검색해보세요!</h6>
       <div id="searchBox">
-        <b-form-input v-model="keyword"  type="text" ref="keyword" placeholder="검색어를 입력해주세요"
-          required>
+        <b-form-input
+          style="border-color: #2790f9;margin-right: 2px;"
+          v-model="keyword"
+          type="text"
+          ref="keyword"
+          placeholder="검색어를 입력해주세요"
+          required
+        >
         </b-form-input>
         <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
       </div>
-      <b-button @click="write" class="btn-hover color-3 mt-4 mb-3">글쓰기</b-button>
-      <b-button @click="getAllPlans" class="btn-hover color-3 mt-4 mb-3 ml-2">전체 목록</b-button>
-      <b-button @click="getMyPlans" class="btn-hover color-3 mt-4 mb-3 ml-2">내 여행 보기</b-button>
-      <b-button @click="getFavoritePlans" class="btn-hover color-3 mt-4 mb-3 ml-2">내가 찜한 여행</b-button>
+      <div class="board row mt-4 mb-3">
+        <div class="col-3"></div>
+        <div class="col-6 list-button" >
+          <b-button @click="getAllPlans" class="mr-2" :class="[btnClass[1]]"
+            >전체 목록</b-button
+          >
+          <b-button @click="getMyPlans" class="mr-2" :class="[btnClass[2]]"
+            >내 여행 보기</b-button
+          >
+          <b-button
+            @click="getFavoritePlans"   :class="[btnClass[3]]"
+      
+            >내가 찜한 여행</b-button
+          >
+        </div>
+        <div class="col-3 write-button">
+          <b-button style="margin-left:160px" class="wbtn"
+              @click="write"
+              >글쓰기</b-button
+            >
+          </div>
+     
+      </div>
     </div>
-    <div class="row" id="board">
-      <template v-for="(article) in articles">
-        <trip-plan-item :article="article" :key="article.articleNo" :articleKey="getArticleKey(article)" ></trip-plan-item>
+    <div class="row pt-2 board">
+      <template v-for="article in articles">
+        <trip-plan-item
+          :article="article"
+          :key="article.articleNo"
+          :articleKey="getArticleKey(article)"
+        ></trip-plan-item>
       </template>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
-import http from "@/api/http.js"
-import TripPlanItem from "@/components/tripplan/TripPlanItem.vue"
+import http from "@/api/http.js";
+import TripPlanItem from "@/components/tripplan/TripPlanItem.vue";
 export default {
   name: "TripPlanList",
   components: {
-    TripPlanItem
-
+    TripPlanItem,
   },
   data() {
     return {
       articles: [],
-    }
+      btnNum : 1,
+      btnClass:{
+        1:'lbtn', 
+        2:'lbtn', 
+        3:'lbtn'
+      }
+    };
   },
   computed: {
     ...mapState("userStore", ["userInfo"]),
@@ -41,240 +75,146 @@ export default {
   created() {
     this.getAllPlans();
   },
-  mounted(){
+  mounted() {
     this.getAllPlans();
   },
   methods: {
     write() {
       this.$router.push("/tripplan/planwrite");
     },
-    getAllPlans(){
-      http.get('/tripPlanBoard/')
-      .then(({ data }) => {
-        this.articles = data;
-        console.log(this.articles)
-      }).catch((error) => {
-        console.log(error);
-      });
+    getAllPlans() {
+      this.makeBtnSelected(1);
+      http
+        .get("/tripPlanBoard/")
+        .then(({ data }) => {
+          this.articles = data;
+          console.log(this.articles);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    getMyPlans(){
+    getMyPlans() {
+      this.makeBtnSelected(2);
       let myData = {
         key: "trip_plan_user_id",
-        word: this.userInfo.userId
-      }
-      http.get('/tripPlanBoard/',{
-        params: myData
-      })
-      .then(({ data }) => {
-        this.articles = data;
-        console.log(this.articles)
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
-    getFavoritePlans(){
+        word: this.userInfo.userId,
+      };
       http
-      .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
-      .then(({ data }) => {
-        this.articles = data;
-        console.log(this.articles)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get("/tripPlanBoard/", {
+          params: myData,
+        })
+        .then(({ data }) => {
+          this.articles = data;
+          console.log(this.articles);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getFavoritePlans() {
+      this.makeBtnSelected(3);
+      http
+        .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
+        .then(({ data }) => {
+          this.articles = data;
+          console.log(this.articles);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getArticleKey(article) {
       const currentTime = new Date().getTime();
-      return { value: article.articleNo ,
-                time : currentTime + article.articleNo
+      return {
+        value: article.articleNo,
+        time: currentTime + article.articleNo,
       };
     },
+    makeBtnSelected(bNum){
+      for(let i = 1;i<=3;i++){
+        if(i == bNum){
+          this.btnClass[i] = 'lbtnS'
+        }else{
+          this.btnClass[i] = 'lbtn'
+        }
+      }
+    }
   },
-  
-  
-
-}
+};
 </script>
 
 <style scoped>
 @font-face {
   font-family: "KCC-Jeongbeom";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "omyu_pretty";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2") format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
-#board{
+
+#header{
+  font-size: 20px;
+}
+.boardGallery{
+  font-family: omyu_pretty;
+}
+.board {
   width: 70vw;
   margin: 0 auto;
 }
 
-#searchBox{
+.list-button{
+  display: flex;
+  justify-content: center;
+}
+
+
+#searchBox {
   margin: 0 auto;
   display: flex;
-  width:200px
+  width: 250px;
 }
 
-#title {
-  font-family: KCC-Jeongbeom;
-  color: #ff9900;
-  width: 450px;
-  text-align: center;
-  margin: 0 auto;
-}
 
-#item :hover {
-  background: #ff9900;
+.lbtn{
+  background-color: #2790f9;
+  color: #fcfcfd;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
-#book-list tbody>tr {
-  background: #fffeed;
+.lbtnS{
+  background-color: #042c61;
+  color: #fcfcfd;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 5px 0 rgba(76, 74, 77, 0.8);
 }
-
-.boardList {
-  font-family: omyu_pretty;
-  font-size: 20px;
+.lbtn:hover{
+    background-position: 100% 0;
+    moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
-
-#book-list {
-  margin: auto;
-  width: 70%;
-  border-collapse: collapse;
+.wbtn{
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
 }
-
-#book-list thead>tr {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-  font-size: 25px;
-}
-
-#book-list tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fffeed;
-}
-
-/* #book-list tr:nth-child(odd):not(:first-child) {
-  background-color: #fffeed;
-} */
-
-#book-list td:first-child {
-  margin-top: 0.5em;
-}
-
-#book-list td:last-child {
-  margin-bottom: 0.5em;
-}
-
-#book-list td:before {
-  font-weight: bold;
-  width: 120px;
-  display: inline-block;
-  color: #000;
-}
-
-#book-list th,
-#book-list td {
-  text-align: center;
-}
-
-#book-list {
-  color: #333;
-  border-radius: 0.4em;
-  overflow: hidden;
-}
-
-#book-list tr {
-  border-color: #bfbfbf;
-}
-
-#book-list th,
-#book-list td {
-  padding: 0.5em 1em;
-}
-
-#recommend {
-  margin: 5%;
-  font-size: 50px;
-}
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(to right,
-      #f3f04f,
-      #ffb34f,
-      #b6d66b,
-      #bad737);
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
-}
-
-/* #preShow {
-  margin: auto;
-  width: 70%;
-  border-collapse: collapse;
-}
-#preShow tr th {
-  border-top: none;
-  background: #ff9f20;
+.wbtn:hover{
+  background-color: #2790f9;
+  border-color: #2790f9;
   color: #fff;
 }
-
-#preShow tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fffeed;
-}
-
-#preShow tr:nth-child(odd):not(:first-child) {
-  background-color: #fffeed;
-}
-
-#preShow td:first-child {
-  margin-top: 0.5em;
-}
-#preShow td:last-child {
-  margin-bottom: 0.5em;
-}
-
-#preShow td:before {
-  font-weight: bold;
-  width: 120px;
-  display: inline-block;
-  color: #000;
-}
-
-#preShow th,
-#preShow td {
-  text-align: center;
-}
-
-#preShow {
-  color: #333;
-  border-radius: 0.4em;
-  overflow: hidden;
-}
-#preShow tr {
-  border-color: #bfbfbf;
-}
-
-#preShow th,
-#preShow td {
-  padding: 0.5em 2em;
-}
-textarea {
-  font-family: omyu_pretty;
-  width: 100%;
-  height: 200px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: solid 2px #f8f4fd;
-  border-radius: 5px;
-  font-size: 16px;
-  resize: both;
-} */</style>
+</style>

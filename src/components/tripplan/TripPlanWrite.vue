@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div id="write-container">
     <b-row>
       <b-col cols="3" id="selectedList">
-        <form ref="writeForm" @submit.prevent="write">
+        <form class="write-form" ref="writeForm" @submit.prevent="write">
           <b-form-group label="여행 제목" label-for="subject" invalid-feedback="제목을 입력해주세요.">
             <b-form-input id="subject" v-model="writeArticle.subject" ref="subject" required></b-form-input>
           </b-form-group>
           <b-form-group label="설명" label-for="content" invalid-feedback="내용을 입력해주세요.">
-            <b-form-textarea rows="5" id="content" v-model="writeArticle.content" ref="content"
+            <b-form-textarea rows="3" id="content" v-model="writeArticle.content" ref="content"
               required></b-form-textarea>
           </b-form-group>
         </form>
@@ -19,7 +19,7 @@
           :isWrite="true"></plan-area></b-col> -->
       <b-col cols="9">
         <map-search-bar v-on:search="search"></map-search-bar>
-        <b-row>
+        <b-row >
           <b-col cols="7" align="left" id="map">
             <map-component :level="level" :lists="results"  :selected="selected" :center="center" />
           </b-col>
@@ -28,7 +28,6 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col></b-col>
     </b-row>
 
   </div>
@@ -128,7 +127,7 @@ export default {
       this.selected = selected;
     },
     showCenter(attraction) {
-      this.level=3;
+      this.level=5;
       this.center = attraction;
     },
     reorder(newSelected) {
@@ -139,6 +138,10 @@ export default {
 </script>
 
 <style scoped>
+#write-container{
+  font-family:omyu_pretty;
+  font-size:20px;
+}
 #myPlan {
   max-height: 700px;
   overflow-y: auto
@@ -155,5 +158,13 @@ export default {
 #selectedList {
   height: 75.6vh;
   overflow-y: auto;
+}
+
+.write-form{
+  border-radius: 10px;
+    background-color: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 </style>
