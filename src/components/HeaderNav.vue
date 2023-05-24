@@ -23,11 +23,11 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item href="#" class="rountlist ml-auto">
             <router-link :to="{ name: 'attraction' }" class="navitem m-2 link"
-              >지역별여행지</router-link
-            >
+              >지역별여행지 &nbsp; &nbsp;/
+            </router-link>
             <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link"
-              >나의여행계획</router-link
-            >
+              >나의여행계획 &nbsp;&nbsp; /
+            </router-link>
             <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link"
               >여행정보공유</router-link
             >

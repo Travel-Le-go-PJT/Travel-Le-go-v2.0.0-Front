@@ -1,6 +1,6 @@
 <template>
-  <div class="board">
-    <h1 id="board-list-title">🛫 여행 정보 🛬</h1>
+  <div class="tripinfopage">
+    <h1 id="title">🛫 여행 정보 공유 🛬</h1>
     <!-- <nav>
       <router-link to="/tripinfo/list">글 목록 &nbsp; &nbsp;</router-link>|
       <router-link to="/board/write">&nbsp; &nbsp;글 쓰기 &nbsp; &nbsp;</router-link>|
@@ -24,8 +24,20 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  margin: 30px;
+<style>
+.tripinfopage {
+  margin-top: 100px;
+  font-weight: 600;
+}
+.navitem {
+  color: #2790f9 !important;
+}
+#title {
+  font-family: KCC-Jeongbeom;
+  color: #ff9900;
+  width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,8 +1,38 @@
 <template>
   <div class="boardList">
     <h1 id="title"></h1>
+    <div id="header">
+      <h6>다녀온 여행지에 대한 정보를 공유해보세요!</h6>
+      <div id="searchBox">
+        <b-form-input
+          style="border-color: #2790f9; margin-right: 2px"
+          v-model="keyword"
+          type="text"
+          ref="keyword"
+          placeholder="검색어를 입력해주세요"
+          required
+        >
+        </b-form-input>
+        <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
+      </div>
+    </div>
+
+    <div class="row" id="board"></div>
     <div>
-      <button type="button" class="btn-hover color-3" @click="writeArticle(article.articleNo)">글 쓰기</button>
+      <button
+        type="button"
+        @click="writeArticle(article.articleNo)"
+        class="mr-2"
+      >
+        전체 목록
+      </button>
+      <button
+        type="button"
+        class="btn-hover color-3"
+        @click="writeArticle(article.articleNo)"
+      >
+        글 쓰기
+      </button>
     </div>
     <div>
       <table id="book-list">
@@ -129,6 +159,17 @@ export default {
 /* #item :hover {
   background: #ff9900;
 } */
+
+#board {
+  width: 70vw;
+  margin: 0 auto;
+}
+
+#searchBox {
+  margin: 0 auto;
+  display: flex;
+  width: 250px;
+}
 #book-list tbody > tr {
   background: #fffeed;
 }

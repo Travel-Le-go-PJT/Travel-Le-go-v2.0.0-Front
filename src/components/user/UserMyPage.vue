@@ -1,52 +1,57 @@
 <template>
-  <b-container class="mt-4" v-if="userInfo">
+  <b-container class="bv-example-row">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show>
-          <h3>내정보</h3>
-        </b-alert>
+      <b-col align="center">
+        <h1 id="title">My Page</h1>
+        <div class="line justify-content-center"></div>
       </b-col>
     </b-row>
+
     <b-row>
       <b-col></b-col>
-      <b-col cols="8">
+      <b-col cols="10">
         <b-jumbotron>
-          <template #header>My Page</template>
-
-          <template #lead>내 정보 확인페이지입니다.</template>
+          <template>내 정보 확인페이지입니다.</template>
 
           <hr class="my-4" />
 
-          <b-container class="mt-4">
+          <b-container>
             <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">아이디</b-col>
+              <b-col cols="2" align-self="end">ID</b-col>
               <b-col cols="4" align-self="start">{{ userInfo.userId }}</b-col>
-              <b-col cols="2"></b-col>
             </b-row>
             <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이름</b-col>
+              <b-col cols="2" align-self="end">Name</b-col>
               <b-col cols="4" align-self="start">{{ userInfo.userName }}</b-col>
-              <b-col cols="2"></b-col>
             </b-row>
             <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이메일</b-col>
+              <b-col cols="2" align-self="end">Email</b-col>
               <b-col cols="4" align-self="start">{{ userInfo.emailId }}</b-col>
-              <b-col cols="2"></b-col>
             </b-row>
             <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">가입일</b-col>
+              <b-col cols="2" align-self="end">Register Date</b-col>
               <b-col cols="4" align-self="start">{{ userInfo.joinDate }}</b-col>
-              <b-col cols="2"></b-col>
             </b-row>
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1" @click="movepage">정보수정</b-button>
-          <b-button variant="danger" href="#" @click="userWithdraw">회원탈퇴</b-button>
+          <b-button
+            variant="primary"
+            href="#"
+            class="button mt-4"
+            @click="movepage"
+            id="modify"
+            >정보수정</b-button
+          >
+          <div></div>
+          <b-button
+            variant="danger"
+            href="#"
+            @click="userWithdraw"
+            class="button"
+            id="delete"
+            >회원탈퇴</b-button
+          >
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -84,4 +89,62 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#title {
+  color: #2790f9;
+  font-weight: 600;
+}
+.form-control {
+  display: inline;
+}
+.line {
+  border-top: 6px solid #2790f9;
+  width: 180px;
+
+  /* margin:  0px; */
+}
+
+.line-black {
+  border-top: 3px solid #08192b;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+
+  margin: 0px;
+}
+#cardbody {
+  margin: auto;
+  border: none;
+}
+.no-border {
+  border-radius: 0;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+.row {
+  justify-content: center;
+}
+.jumbotron {
+  background-color: white;
+}
+.button {
+  width: 30%;
+  /* background-color: #2790f9; */
+  font-weight: 800;
+  margin: 3px;
+}
+#modify {
+  background-color: #2790f9;
+}
+#delete {
+  background-color: #ff7474;
+}
+.col-4 {
+  height: 40px;
+}
+.col-2 {
+  height: 40px;
+}
+</style>

@@ -1,40 +1,48 @@
 <template>
-  <b-container class="mt-4" v-if="userInfo">
+  <b-container class="bv-example-row">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show>
-          <h3 v-if="isAdmin">
-            {{ user.userId }}({{ user.userName }}) 사용자 정보 수정하기
-          </h3>
-          <h3 v-else>내 정보 수정하기</h3>
-        </b-alert>
+      <b-col align="center">
+        <h1 v-if="isAdmin">
+          {{ user.userId }}({{ user.userName }}) 사용자 정보 수정하기
+        </h1>
+        <h1 v-else>Update My Info</h1>
+        <div class="line justify-content-center"></div>
       </b-col>
     </b-row>
+    <!-- <b-container class="mt-4" v-if="userInfo"> -->
+
     <b-row>
-      <b-col cols="8">
-        <b-card class="mt-3" style="max-width: 40rem" align="left">
+      <b-col cols="5">
+        <b-card
+          class="mt-3"
+          style="max-width: 40rem"
+          align="left"
+          id="cardbody"
+        >
           <b-form v-if="show">
-            <b-form-group label="이름" label-for="userName">
+            <b-form-group label="Name" label-for="userName">
               <b-form-input
                 id="userName"
                 v-model="user.userName"
                 type="text"
                 required
+                class="form-control no-border"
               ></b-form-input>
             </b-form-group>
             <b-form-group
-              label="아이디"
+              label="ID"
               label-for="userId"
-              description="아이디는 변경할 수 없어요"
+              description="아이디는 변경할 수 없어요!"
             >
               <b-form-input
                 id="userId-input"
                 v-model="user.userId"
                 type="text"
                 readonly
+                class="form-control no-border"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="비밀번호" label-for="userPwd">
+            <b-form-group label="Password" label-for="userPwd">
               <b-form-input
                 id="userPwd"
                 v-model="user.userPwd"
@@ -57,13 +65,13 @@
                 required
               ></b-form-input>
             </b-form-group>-->
-            <label for="emailId" class="form-label">이메일</label>
+            <label for="emailId" class="form-label">Email</label>
             <div class="d-flex justify-content-between">
               <input
                 v-model="user.emailId"
                 style="width: 40%"
                 type="text"
-                class="form-control"
+                class="form-control no-border"
                 id="emailId"
                 name="emailId"
                 placeholder="이메일"
@@ -84,14 +92,21 @@
               >회원가입</b-button
             >-->
 
-            <b-button type="button" variant="primary" @click="modify"
+            <b-button
+              type="button"
+              variant="primary"
+              @click="modify"
+              class="button mt-4"
+              id="save"
               >저장하기</b-button
             >
             <b-button
               type="button"
               variant="danger"
               @click="getUserInfo(user.userId)"
-              >초기화</b-button
+              class="button"
+              id="reset"
+              >다시 수정하기</b-button
             >
           </b-form>
         </b-card>
@@ -171,4 +186,55 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h1 {
+  color: #2790f9;
+  font-weight: 600;
+}
+.form-control {
+  display: inline;
+}
+.line {
+  border-top: 6px solid #2790f9;
+  width: 180px;
+
+  /* margin:  0px; */
+}
+#cardbody {
+  margin: auto;
+  border: none;
+}
+.no-border {
+  border-radius: 0;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+.row {
+  justify-content: center;
+}
+#check-button {
+  width: 20%;
+  height: 40px;
+  text-align: top;
+
+  font-weight: 800;
+  background-color: #2790f9;
+}
+#userId-input {
+  width: 100%;
+}
+.button {
+  width: 100%;
+  /* background-color: #2790f9; */
+  font-weight: 800;
+  margin: 3px;
+}
+#save {
+  background-color: #2790f9;
+}
+#reset {
+  background-color: #ff7474;
+}
+</style>
