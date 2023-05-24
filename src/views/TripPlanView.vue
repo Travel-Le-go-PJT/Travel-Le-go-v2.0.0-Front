@@ -8,26 +8,26 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
 @font-face {
   font-family: "KCC-Jeongbeom";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 #container {
   padding: 20px;
+  margin-top: 30px;
 }
 
 #title {
   font-family: KCC-Jeongbeom;
-  color: #ff9900;
+  color: #2790f9;
   width: 600px;
   text-align: center;
   margin: 0 auto;
