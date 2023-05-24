@@ -1,36 +1,10 @@
 <template>
   <div>
-    <div>
-      <nav class="navbar fixed-top navbar-light bg-light">
-        <div class="container-fluid">
-          <b-navbar-brand href="#">
-            <router-link to="/">
-              <b-img
-                :src="require('@/assets/logo/Travel_Le_go_logo.jpg')"
-                id="logo"
-                class="d-inline-block align-top"
-                alt="logo"
-              ></b-img>
-            </router-link>
-          </b-navbar-brand>
-
-          <router-link :to="{ name: 'attraction' }" class="m-2 link">
-            <b-icon icon="map" font-scale="2"></b-icon>지역별여행지
-          </router-link>
-          <router-link :to="{ name: 'tripplan' }" class="m-2 link">
-            <b-icon icon="instagram" font-scale="2"></b-icon>나의여행계획
-          </router-link>
-          <router-link :to="{ name: 'tripinfo' }" class="m-2 link">
-            <b-icon icon="house-fill" font-scale="2"></b-icon>여행정보공유
-          </router-link>
-        </div>
-      </nav>
-    </div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar class="fixed-top" :class="navbarClasses" toggleable="lg" justify-content-end>
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-img
-            :src="require('@/assets/logo/Travel_Le_go_logo.jpg')"
+            :src="require('@/assets/logo/Travel_Le_go_logo-removebg.png')"
             id="logo"
             class="d-inline-block align-top"
             alt="logo"
@@ -40,52 +14,34 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'attraction' }" class="m-2 link">
-              <b-icon icon="map" font-scale="2"></b-icon>지역별여행지
-            </router-link>
-            <router-link :to="{ name: 'tripplan' }" class="m-2 link">
-              <b-icon icon="instagram" font-scale="2"></b-icon>나의여행계획
-            </router-link>
-            <router-link :to="{ name: 'tripinfo' }" class="m-2 link">
-              <b-icon icon="house-fill" font-scale="2"></b-icon>여행정보공유
-            </router-link>
+      <b-collapse class="ml-auto" id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#" class="rountlist ml-auto">
+            <router-link :to="{ name: 'attraction' }" class="navitem m-2 link">지역별여행지</router-link>
+            <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link">나의여행계획</router-link>
+            <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link">여행정보공유</router-link>
           </b-nav-item>
         </b-navbar-nav>
 
         <!-- after login -->
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center">
-            <b-avatar
-              variant="primary"
-              v-text="userInfo.userId.charAt(0).toUpperCase()"
-            ></b-avatar>
+            <b-avatar variant="primary" v-text="userInfo.userId.charAt(0).toUpperCase()"></b-avatar>
           </b-nav-item>
           <b-nav-item-dropdown right class="align-self-center">
             {{ userInfo.userName }}({{ userInfo.userId }})님
             <b-dropdown-item href="#" v-if="userInfo.userRole == 1">
-              <router-link
-                :to="{ name: 'mypage' }"
-                class="link align-self-center"
-                >마이페이지</router-link
-              >
+              <router-link :to="{ name: 'mypage' }" class="link align-self-center">마이페이지</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#" v-else>
-              <router-link
-                :to="{ name: 'userlist' }"
-                class="link align-self-center"
-                >회원관리</router-link
-              >
+              <router-link :to="{ name: 'userlist' }" class="link align-self-center">회원관리</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
                 id="logout"
                 class="align-self-center link"
                 @click.prevent="onClickLogout"
-                >로그아웃</b-nav-item
-              >
+              >로그아웃</b-nav-item>
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -121,7 +77,15 @@ export default {
   name: "HeaderNav",
   components: {},
   data() {
-    return {};
+    return {
+      navbarClasses: "",
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
     ...mapState(userStore, ["isLogin", "userInfo"]),
@@ -141,6 +105,13 @@ export default {
       sessionStorage.removeItem("refresh-token");
       if (this.$route.path != "/") this.$router.push({ name: "home" });
     },
+    handleScroll() {
+      if (window.scrollY > 0) {
+        this.navbarClasses = "navbar-scrolled";
+      } else {
+        this.navbarClasses = "";
+      }
+    },
   },
 };
 </script>
@@ -154,11 +125,36 @@ export default {
   font-style: normal;
 }
 #logo {
-  width: 100px;
+  width: auto;
+  height: 40px;
 }
 
 .link {
   text-decoration: none;
-  color: #42b983;
+}
+.navbar-toggler {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-scrolled {
+  background-color: #ffffff; /* 하얀색 배경으로 변경 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease; /* 배경색에 대한 트랜지션 효과 추가 */
+}
+nav a {
+  color: #2790f9;
+}
+.navitem {
+  color: white;
+}
+
+.navbar-scrolled a {
+  color: #2790f9;
+}
+
+.content {
+  height: 2000px; /* 콘텐츠 높이 증가를 위한 임시 설정 */
 }
 </style>

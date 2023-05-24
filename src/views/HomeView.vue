@@ -15,13 +15,23 @@
           <!-- Text slides with image -->
           <b-carousel-slide caption="asdasdasdasd">
             <template #img>
-              <img class="d-block w-100" height="697" src="@/assets/mBgImg1.jpg" alt="image slot" />
+              <img
+                class="d-block w-100"
+                height="697"
+                src="@/assets/logo/Travel_Le_go_logo.jpg"
+                alt="image slot"
+              />
             </template>
           </b-carousel-slide>
 
           <b-carousel-slide>
             <template #img>
-              <img class="d-block w-100" height="697" src="@/assets/mBgImg2.jpg" alt="image slot" />
+              <img
+                class="d-block w-100"
+                height="697"
+                src="@/assets/logo/Travel_Le_go_logo.jpg"
+                alt="image slot"
+              />
             </template>
           </b-carousel-slide>
 
