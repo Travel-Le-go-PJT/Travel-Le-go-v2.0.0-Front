@@ -1,10 +1,10 @@
 <template>
     <div class="detail">
         <div class="row">
-            <div class="col-lg-7" style="height: 500px">
+            <div class="col-lg-7" style="height: 600px">
                 <map-component :level="10" :selected="selected"></map-component>
             </div>
-            <div class="col-lg-5 d-flex align-items-center justify-content-center">
+            <div class="col-lg-5 d-flex justify-content-center">
                 <trip-plan-info :article="article"></trip-plan-info>
             </div>
         </div>
@@ -83,6 +83,11 @@ export default {
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
+}
+
+.detail{
+    font-family: omyu_pretty;
+    font-size:20px
 }
 
 textarea {

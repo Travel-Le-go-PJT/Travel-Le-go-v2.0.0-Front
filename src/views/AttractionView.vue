@@ -1,12 +1,12 @@
 <template>
   <div id="container">
     <div>
-      <h1 id="title">어디로 떠나시나요?</h1>
+      <h1 id="title">어디로 떠나볼까요?</h1>
     </div>
     <div id="header">
       <h6>가고 싶은 여행지를 검색해보세요!</h6>
       <div id="searchBox">
-        <b-form-input v-model="keyword" type="text" ref="keyword" placeholder="검색어를 입력해주세요" required>
+        <b-form-input style="border-color: #2790f9;margin-right: 2px;" v-model="keyword" type="text" ref="keyword" placeholder="검색어를 입력해주세요" required>
         </b-form-input>
         <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
       </div>
@@ -25,7 +25,7 @@
     <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
       dialog-class="modal-dialog-centered">
       <template #default="{ cancel }">
-        <div class="d-flex" style="top: 50%;">
+        <div class="d-flex lmodal" style="top: 50%;">
           <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
             <img :src="selectedLocation.image" class="modal-image" :alt="selectedLocation.sidoName">
           </div>
@@ -135,6 +135,13 @@ export default {
 
 #container {
   padding: 20px;
+  font-family:omyu_pretty;
+  font-size: 20px;
+}
+
+.lmodal{
+  font-family:omyu_pretty;
+  font-size: 18px;
 }
 
 #title {
@@ -143,6 +150,7 @@ export default {
   width: 600px;
   text-align: center;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 #board {
@@ -153,14 +161,7 @@ export default {
 #searchBox {
   margin: 0 auto;
   display: flex;
-  width: 300px
+  width: 250px
 }
 
-#title {
-  font-family: KCC-Jeongbeom;
-  color: #ff9900;
-  width: 450px;
-  text-align: center;
-  margin: 0 auto;
-}
 </style>

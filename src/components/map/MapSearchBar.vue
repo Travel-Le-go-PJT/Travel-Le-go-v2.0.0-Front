@@ -73,4 +73,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.custom-select{}
+</style>

@@ -181,6 +181,7 @@ export default {
     },
     selected() {
       if (this.map != null) {
+        this.map.setLevel(this.level);
         this.changeSelected();
       }
     }
@@ -189,41 +190,5 @@ export default {
 </script>
 
 <style scoped>
-.customoverlay {
-  position: relative;
-  bottom: 85px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  border-bottom: 2px solid #ddd;
-  float: left;
 
-}
-
-.customoverlay a {
-  display: block;
-  text-decoration: none;
-  color: #000;
-  text-align: center;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  overflow: hidden;
-  background: #d95050;
-  background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
-}
-
-.customoverlay .title {
-  display: block;
-  text-align: center;
-  background: #fff;
-  margin-right: 35px;
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.customoverlay:nth-of-type(n) {
-  border: 0;
-  box-shadow: 0px 1px 2px #888;
-}
 </style>

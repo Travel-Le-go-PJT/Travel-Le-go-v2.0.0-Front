@@ -1,22 +1,21 @@
 <template>
-  <div id="cardbox" class="col-md-4 p-3">
-    <div id="card">
-      <div class="card-header">{{ article.userId }}</div>
+  <div class="cardbox col-md-4 pb-5">
+    <div class="card">
       <img class="card-img-top" src="" alt="" />
       <div class="card-body">
-        <h5 class="card-title">{{ article.subject }}</h5>
-        <p class="card-text">{{ article.subject }}</p>
-
-        <div class="row">
-          <div class="col-6">
-            <button type="button" @click="showArticle(article.articleNo)" class="btn-hover">
+        <h2 class="card-title">{{ article.subject }}</h2>
+        <p class="card-text"><b-icon icon="person-fill"></b-icon><strong> {{ article.userId }}</strong></p>
+        <p class="card-text"><b-icon icon="calendar2-date"></b-icon> {{article.registerTime | showTime}}</p>
+        <p class="card-text"><b-icon icon="eye-fill"></b-icon>{{ "\t" + article.hit }}</p>
+        <div class="row pt-3 d-flex justify-content-center align-items-center">
+          <div class="col-6 ">
+            <b-button class="card-button" variant="outline-info" @click="showArticle(article.articleNo)" >
               자세히보기
-            </button>
+            </b-button>
           </div>
-          <div class="col-6 d-flex justify-content-center align-items-center">
-            <b-button variant="outline-danger" style="box-shadow: none; width:160px;height:40px"
-              @click="favorite(article.articleNo)">
-              <b-icon :icon="favoriteIcon"></b-icon>
+          <div class="col-6 ">
+            <b-button class="card-button"  variant="outline-danger" @click="favorite(article.articleNo)">
+              <b-icon :icon="favoriteIcon"></b-icon><span style="font-size: 20px; text-align: center;"> {{favoriteCount}}</span>
             </b-button>
           </div>
         </div>
@@ -34,6 +33,7 @@ export default {
     return {
       favoriteIcon: "heart",
       isFavorite: false,
+      favoriteCount: 0
     };
   },
   mounted() {
@@ -55,6 +55,12 @@ export default {
         }
       })
       .catch(() => { });
+      http.get(`/tripPlanBoard/favorite/${this.article.articleNo}`)
+                .then(({ data }) => {
+                    this.favoriteCount = data;
+                }).catch(() => {
+
+            });
   },
   props: {
     article: {},
@@ -87,6 +93,7 @@ export default {
             if (data.result == "SUCCESS") {
               this.isFavorite = false;
               this.favoriteIcon = "heart";
+              this.favoriteCount -= 1;
             }
           });
       } else {
@@ -94,6 +101,7 @@ export default {
           if (data.result == "SUCCESS") {
             this.isFavorite = true;
             this.favoriteIcon = "heart-fill";
+            this.favoriteCount += 1;  
           }
         });
       }
@@ -111,56 +119,20 @@ export default {
   font-style: normal;
 }
 
-#cardbox {
-  padding: 2px;
+.cardbox{
+  display: flex;
+  justify-content: space-around;
 }
-
 .card {
   float: left;
 }
 
-card-img-top {
-  height: 800px;
-}
-
-.btn-hover {
-  width: 80px;
-  font-family: omyu_pretty;
+.card-button{
+  box-shadow: none; 
+  width:140px;
+  height:40px;
   font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 20px;
-  height: max-content + 10px;
-  text-align: center;
-  border: none;
-  background-color: #ffffff;
-  background-size: 300% 100%;
-  padding: 10px 0px;
-  border-radius: 10px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
 }
 
-.btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}
 
-.btn-hover:focus {
-  outline: none;
-}
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(to right,
-      #f3f04f,
-      #fca533,
-      #7dd66b,
-      #bad737);
-  box-shadow: 0 4px 15px 0 rgba(145, 79, 68, 0.75);
-}
 </style>
