@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-nav></header-nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
@@ -11,7 +11,7 @@ export default {
   components: {
     HeaderNav,
   },
-}
+};
 </script>
 <style>
 #app {
@@ -21,11 +21,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
+.navbar {
+  padding: 0 !important;
 }
-
 nav a {
   font-weight: bold;
   color: #2c3e50;

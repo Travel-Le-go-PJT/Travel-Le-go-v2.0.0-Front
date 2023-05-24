@@ -23,7 +23,6 @@
           </b-nav-item>
         </b-navbar-nav>
 
-        <!-- after login -->
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center">
             <b-avatar variant="primary" v-text="userInfo.userId.charAt(0).toUpperCase()"></b-avatar>
@@ -46,7 +45,6 @@
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
-        <!-- before login -->
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
@@ -142,6 +140,9 @@ export default {
   background-color: #ffffff; /* 하얀색 배경으로 변경 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease; /* 배경색에 대한 트랜지션 효과 추가 */
+}
+.navbar {
+  padding: 0;
 }
 nav a {
   color: #2790f9;

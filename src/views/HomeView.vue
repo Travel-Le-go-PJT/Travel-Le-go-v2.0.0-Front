@@ -128,7 +128,9 @@ export default {
   margin-right: 10px;
   scroll-snap-align: start;
 }
-
+.navbar {
+  padding: 0;
+}
 .controls {
   display: flex;
   justify-content: space-between;
