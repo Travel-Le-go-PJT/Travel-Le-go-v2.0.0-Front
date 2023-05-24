@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-navbar class="fixed-top" :class="navbarClasses" toggleable="lg" justify-content-end>
+    <b-navbar
+      class="fixed-top"
+      :class="navbarClasses"
+      toggleable="lg"
+      justify-content-end
+    >
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-img
@@ -17,30 +22,51 @@
       <b-collapse class="ml-auto" id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item href="#" class="rountlist ml-auto">
-            <router-link :to="{ name: 'attraction' }" class="navitem m-2 link">지역별여행지</router-link>
-            <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link">나의여행계획</router-link>
-            <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link">여행정보공유</router-link>
+            <router-link :to="{ name: 'attraction' }" class="navitem m-2 link"
+              >지역별여행지</router-link
+            >
+            <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link"
+              >나의여행계획</router-link
+            >
+            <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link"
+              >여행정보공유</router-link
+            >
           </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center">
-            <b-avatar variant="primary" v-text="userInfo.userId.charAt(0).toUpperCase()"></b-avatar>
+            <b-avatar
+              id="userid-icon"
+              variant="primary"
+              v-text="userInfo.userId.charAt(0).toUpperCase()"
+            ></b-avatar>
           </b-nav-item>
-          <b-nav-item-dropdown right class="align-self-center">
-            {{ userInfo.userName }}({{ userInfo.userId }})님
+          <b-nav-item-dropdown right class="align-self-center"
+            >&nbsp;&nbsp;&nbsp; {{ userInfo.userName }}({{ userInfo.userId }})님
+
+            <div class="line justify-content-center"></div>
             <b-dropdown-item href="#" v-if="userInfo.userRole == 1">
-              <router-link :to="{ name: 'mypage' }" class="link align-self-center">마이페이지</router-link>
+              <router-link
+                :to="{ name: 'mypage' }"
+                class="user-dropdown link align-self-center"
+                >마이페이지</router-link
+              >
             </b-dropdown-item>
             <b-dropdown-item href="#" v-else>
-              <router-link :to="{ name: 'userlist' }" class="link align-self-center">회원관리</router-link>
+              <router-link
+                :to="{ name: 'userlist' }"
+                class="user-dropdown link align-self-center"
+                >회원관리</router-link
+              >
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
                 id="logout"
-                class="align-self-center link"
+                class="user-dropdown align-self-center"
                 @click.prevent="onClickLogout"
-              >로그아웃</b-nav-item>
+                >로그아웃</b-nav-item
+              >
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -48,16 +74,20 @@
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>
+              <b-icon
+                icon="people"
+                font-scale="2"
+                style="color: #2790f9"
+              ></b-icon>
             </template>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'join' }" class="link">
-                <b-icon icon="person-circle"></b-icon>회원가입
+                <b-icon icon="person-circle"></b-icon>&nbsp; 회원가입
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'login' }" class="link">
-                <b-icon icon="key"></b-icon>로그인
+                <b-icon icon="key"></b-icon>&nbsp; 로그인
               </router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
@@ -127,8 +157,16 @@ export default {
   height: 40px;
 }
 
-.link {
+.nav-link {
   text-decoration: none;
+  padding: 0 !important;
+}
+
+.line {
+  border-top: 6px solid #2790f9 !important;
+  width: 100%;
+
+  /* margin:  0px; */
 }
 .navbar-toggler {
   border: none;
@@ -139,7 +177,7 @@ export default {
 .navbar-scrolled {
   background-color: #ffffff; /* 하얀색 배경으로 변경 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.5s ease; /* 배경색에 대한 트랜지션 효과 추가 */
+  transition: background-color 0.8s ease; /* 배경색에 대한 트랜지션 효과 추가 */
 }
 .navbar {
   padding: 0;
@@ -155,7 +193,19 @@ nav a {
   color: #2790f9;
 }
 
+#userid-icon {
+  color: white;
+  background-color: #56abff;
+}
+
 .content {
   height: 2000px; /* 콘텐츠 높이 증가를 위한 임시 설정 */
+}
+.dropdown-item {
+  text-decoration: none;
+  color: #56abff;
+}
+a.nav-link {
+  color: #2790f9;
 }
 </style>
