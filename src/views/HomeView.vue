@@ -11,7 +11,7 @@
                   id="logo"
                   class="d-inline-block align-top"
                   alt="logo"
-                  style="width: 300px;"
+                  style="width: 300px"
                 ></b-img>
               </router-link>
               <!-- <h1>Travel Le go</h1>
@@ -55,7 +55,10 @@
       <swiper class="swiper" :options="swiperOption">
         <template v-for="article in bestPlans">
           <swiper-slide :key="article.articleNo">
-            <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
+            <trip-plan-item
+              :article="article"
+              :key="article.articleNo"
+            ></trip-plan-item>
           </swiper-slide>
         </template>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -64,7 +67,10 @@
       <swiper class="swiper" :options="swiperOption">
         <template v-for="article in bestInfos">
           <swiper-slide :key="article.articleNo">
-            <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
+            <trip-plan-item
+              :article="article"
+              :key="article.articleNo"
+            ></trip-plan-item>
           </swiper-slide>
         </template>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -85,7 +91,10 @@
     <swiper class="swiper" :options="swiperOption">
       <template v-for="article in bestPlans">
         <swiper-slide :key="article.articleNo">
-          <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
+          <trip-plan-item
+            :article="article"
+            :key="article.articleNo"
+          ></trip-plan-item>
         </swiper-slide>
       </template>
       <div class="swiper-button-prev" slot="button-prev"></div>
@@ -94,7 +103,10 @@
     <swiper class="swiper" :options="swiperOption">
       <template v-for="article in bestInfos">
         <swiper-slide :key="article.articleNo">
-          <trip-plan-item :article="article" :key="article.articleNo"></trip-plan-item>
+          <trip-plan-item
+            :article="article"
+            :key="article.articleNo"
+          ></trip-plan-item>
         </swiper-slide>
       </template>
       <div class="swiper-button-prev" slot="button-prev"></div>
@@ -253,6 +265,7 @@ video {
   min-width: 100%;
   min-height: 100%;
 }
+
 .progress-line {
   height: 10px;
 }

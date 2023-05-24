@@ -1,21 +1,24 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show>
-          <h3>LOG IN</h3>
-        </b-alert>
+      <b-col align="center">
+        <h1>LOG IN</h1>
+        <div class="line justify-content-center"></div>
       </b-col>
     </b-row>
     <b-row>
-      <b-col></b-col>
-      <b-col cols="8">
-        <b-card class="mt-3" style="max-width: 40rem" align="left">
+      <b-col cols="5">
+        <b-card
+          class="mt-3"
+          style="max-width: 40rem"
+          id="cardbody"
+          align="left"
+        >
           <b-form @submit="confirm">
             <b-alert show variant="danger" v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</b-alert
             >
-            <b-form-group label="아이디:" label-for="userId">
+            <b-form-group label="ID" label-for="userId">
               <b-form-input
                 id="userId"
                 v-model="user.userId"
@@ -23,9 +26,11 @@
                 type="text"
                 placeholder="아이디 입력해주세요."
                 @keyup.enter="confirm"
+                class="form-control no-border"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="비밀번호:" label-for="userPwd">
+            <!-- <div></div> -->
+            <b-form-group label="Password" label-for="userPwd">
               <b-form-input
                 type="password"
                 id="userPwd"
@@ -33,26 +38,32 @@
                 required
                 placeholder="비밀번호 입력해주세요."
                 @keyup.enter="confirm"
+                class="form-control no-border"
               ></b-form-input>
             </b-form-group>
-            <b-button
-              type="button"
-              variant="primary"
-              class="m-1"
-              @click="confirm"
-              >로그인</b-button
-            >
-            <b-button
-              type="button"
-              variant="success"
-              class="m-1"
-              @click="movePage"
-              >회원가입</b-button
-            >
+
+            <a href="#">비밀번호를 잊으셨나요? </a>
+            <div></div>
+            <div align="center">
+              <div>
+                <b-button
+                  id="loginbutton"
+                  type="button"
+                  variant="primary"
+                  class="m-1"
+                  @click="confirm"
+                  >로그인</b-button
+                >
+              </div>
+              <div>
+                <a href="#" @click="movePage"
+                  >회원이 아니세요 ? 회원가입 하기</a
+                >
+              </div>
+            </div>
           </b-form>
         </b-card>
       </b-col>
-      <b-col></b-col>
     </b-row>
   </b-container>
 </template>
@@ -108,4 +119,38 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  color: #2790f9;
+  font-weight: 600;
+}
+#cardbody {
+  margin: auto;
+  border: none;
+}
+.line {
+  border-top: 6px solid #2790f9;
+  width: 160px;
+
+  /* margin:  0px; */
+}
+a {
+  font-size: 13px;
+  color: #444444;
+}
+.no-border {
+  border-radius: 0;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+.row {
+  justify-content: center;
+}
+#loginbutton {
+  width: 100%;
+  background-color: #2790f9;
+  font-weight: 800;
+}
+</style>

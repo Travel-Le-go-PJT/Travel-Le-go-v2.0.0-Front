@@ -1,6 +1,6 @@
 <template>
-  <div class="board">
-    <h1>🙋‍♂️ User 🙋‍♀️</h1>
+  <div class="userpage">
+    <h1></h1>
     <router-view></router-view>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  margin: 30px;
+.userpage {
+  margin-top: 150px;
 }
 </style>
