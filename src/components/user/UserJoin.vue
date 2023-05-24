@@ -77,7 +77,7 @@
                 v-model="joinUser.emailId"
                 style="width: 40%"
                 type="text"
-                class="form-control form-control no-border"
+                class="form-control no-border"
                 id="emailId"
                 name="emailId"
                 placeholder="이메일"
