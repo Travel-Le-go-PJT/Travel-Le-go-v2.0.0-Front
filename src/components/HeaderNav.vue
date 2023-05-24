@@ -139,7 +139,7 @@ export default {
 .navbar-scrolled {
   background-color: #ffffff; /* 하얀색 배경으로 변경 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease; /* 배경색에 대한 트랜지션 효과 추가 */
+  transition: background-color 0.5s ease; /* 배경색에 대한 트랜지션 효과 추가 */
 }
 .navbar {
   padding: 0;
