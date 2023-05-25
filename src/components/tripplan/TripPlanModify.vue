@@ -122,18 +122,19 @@ export default {
     modify() {
       let err = true;
       let msg = "";
-      if (this.article.userId != this.userInfo.userId || this.userInfo.userId==null) {
+      console.log(this.article);
+      if (this.userInfo == null || this.article.userId != this.userInfo.userId || this.userInfo.userId==null) {
         alert("권한이 없습니다..");
         this.$router.push("/");
         return;
-      } else if (!this.article.subject && err) {
+      } else if (!this.article.subject.trim() && err) {
         msg = "제목을 입력해주세요";
         err = false;
-        this.$refs.article.subject.focus();
-      } else if (!this.article.content && err) {
+        this.$refs.subject.focus();
+      } else if (!this.article.content.trim() && err) {
         msg = "내용을 입력해주세요";
         err = false;
-        this.$refs.article.content.focus();
+        this.$refs.content.focus();
       } else if (this.selected.length == 0 && err) {
         msg = "여행할 관광지를 하나 이상 추가해주세요";
         err = false;
