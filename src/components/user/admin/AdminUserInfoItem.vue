@@ -8,20 +8,16 @@
     <td>
       <button
         type="submit"
-        class="btn-hover color-3"
+        class="btn-hover color-3 wbtn"
         @click="getUserArticle(user.userId)"
-      >
-        작성글 보기
-      </button>
+      >작성글 보기</button>
     </td>
     <td>
       <button
         type="submit"
-        class="btn-hover color-3"
+        class="btn-hover color-3 wbtn"
         @click="adminModifyUserInfo(user.userId)"
-      >
-        수정하기
-      </button>
+      >수정하기</button>
     </td>
   </tr>
 </template>
@@ -68,23 +64,6 @@ export default {
 </script>
 
 <style scoped>
-#title {
-  color: #ff9900;
-}
-.boardList {
-  font-family: Pretendard;
-}
-#book-list {
-  margin: auto;
-  width: 70%;
-  border-collapse: collapse;
-}
-#book-list thead > tr {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-}
-
 #book-list tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -103,70 +82,33 @@ export default {
 }
 
 #book-list td:before {
-  font-weight: bold;
+  /* font-weight: bold; */
   width: 120px;
   display: inline-block;
   color: #000;
 }
-
-#book-list th,
+.subject {
+  float: left;
+}
 #book-list td {
   text-align: center;
-}
-
-#book-list {
-  color: #333;
-  border-radius: 0.4em;
-  overflow: hidden;
-}
-#book-list tr {
-  border-color: #bfbfbf;
+  font-size: 90%;
+  color: #5e5e5e;
+  font-weight: 100;
 }
 
 #book-list th,
 #book-list td {
   padding: 0.5em 1em;
 }
-.btn-hover {
-  width: 100px;
-  font-family: omyu_pretty;
-  font-size: 20px;
-  font-weight: 600;
-  color: #000000;
-  cursor: pointer;
-  margin: 20px;
-  height: max-content + 10px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  padding: 10px 0px;
-  border-radius: 10px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
 }
-
-.btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}
-
-.btn-hover:focus {
-  outline: none;
-}
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #ffb34f,
-    #b6d66b,
-    #bad737
-  );
-  /* box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75); */
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
 </style>

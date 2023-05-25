@@ -34,7 +34,7 @@ export default {
 }
 #title {
   font-family: KCC-Jeongbeom;
-  color: #ff9900;
+  color: #2790f9;
   width: 600px;
   text-align: center;
   margin: 0 auto;

@@ -1,13 +1,13 @@
 <template>
   <div class="boardList">
-    <h1 id="title">{{ this.userId }}가 작성한 글</h1>
+    <h1 id="title">"{{ this.userId }}"님이 작성하신 글 입니다.</h1>
     <div>
       <table id="book-list">
         <colgroup>
-          <col style="width: 20%" />
-          <col style="width: 20%" />
-          <col style="width: 80%" />
-          <col style="width: 20%" />
+          <col style="width: 10%" />
+          <col style="width: 10%" />
+          <col style="width: 50%" />
+          <col style="width: 40%" />
         </colgroup>
         <thead>
           <tr>
@@ -129,16 +129,31 @@ export default {
 
 #title {
   font-family: KCC-Jeongbeom;
-  color: #ff9900;
+  color: #303033;
   width: 800px;
   text-align: center;
   margin: 0 auto;
+  font-size: 20px;
 }
 /* #item :hover {
   background: #ff9900;
 } */
+
+#board {
+  width: 70vw;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+#searchBox {
+  margin: 0 auto;
+  display: flex;
+  width: 250px;
+}
 #book-list tbody > tr {
-  background: #fffeed;
+  background: #ffffff;
+  border-right: none;
+  border-left: none;
 }
 .boardList {
   font-family: omyu_pretty;
@@ -146,14 +161,14 @@ export default {
 }
 #book-list {
   margin: auto;
-  width: 70%;
+  width: 50%;
   border-collapse: collapse;
 }
 #book-list thead > tr {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-  font-size: 25px;
+  /* border-top: ; */
+  background: #ebf5ff;
+  color: #303033;
+  font-size: 20px;
 }
 
 #book-list tr {
@@ -174,7 +189,7 @@ export default {
 }
 
 #book-list td:before {
-  font-weight: bold;
+  /* font-weight: bold; */
   width: 120px;
   display: inline-block;
   color: #000;
@@ -183,17 +198,20 @@ export default {
 #book-list th,
 #book-list td {
   text-align: center;
+
+  font-weight: 400;
 }
 
 #book-list {
   color: #333;
-  border-radius: 0.4em;
   overflow: hidden;
 }
 #book-list tr {
   border-color: #bfbfbf;
 }
-
+.subject {
+  float: left;
+}
 #book-list th,
 #book-list td {
   padding: 0.5em 1em;
@@ -203,14 +221,14 @@ export default {
   font-size: 50px;
 }
 
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #ffb34f,
-    #b6d66b,
-    #bad737
-  );
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
+}
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
 </style>
