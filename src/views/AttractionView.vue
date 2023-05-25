@@ -11,11 +11,12 @@
           v-model="keyword"
           type="text"
           ref="keyword"
+          @keydown.enter="search"
           placeholder="검색어를 입력해주세요"
           required
         >
         </b-form-input>
-        <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
+        <b-button variant="primary" @click="search"><b-icon-search></b-icon-search></b-button>
       </div>
     </div>
     <div class="row" id="board">
@@ -81,6 +82,7 @@ export default {
   components: {},
   data() {
     return {
+      keyword:"",
       locations: [],
       selectedLocation: {},
       isModalOpen: false,
@@ -106,9 +108,20 @@ export default {
     makePlan() {
       let searchData = {
         sidoCode: this.selectedLocation.sidoCode,
+        keyword : this.keyword
       };
       this.$router.push({ name: "planwrite", query: searchData });
     },
+    search(){
+      let myData = {
+        keyword:this.keyword
+      }
+      http.get("/attraction/sido/search",{
+        params: myData,
+      }).then(({ data }) => {
+        this.locations = data;
+      });
+    }
   },
 };
 </script>

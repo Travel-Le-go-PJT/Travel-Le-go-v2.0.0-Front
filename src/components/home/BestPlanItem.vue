@@ -71,9 +71,16 @@ export default {
 .card {
     float: left;
     width: 250px;
+    height: 350px;
     box-shadow: 0 0 10px rgb(31, 38, 135, 0.2);
     border-radius: 10px;
     border-color: #b2cce6;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card-button {
