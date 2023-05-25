@@ -39,7 +39,7 @@
             <th class="subject">제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>👍</th>
+            <th>조회 수</th>
           </tr>
         </thead>
         <tbody id="item">

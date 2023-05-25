@@ -4,9 +4,9 @@
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-img
-            :src="require('@/assets/logo/Travel_Le_go_logo-removebg.png')"
+            :src="require('@/assets/logo/logo-removebg.png')"
             id="logo"
-            class="d-inline-block align-top"
+            class="d-inline-block align-top m-1"
             alt="logo"
           ></b-img>
         </router-link>
@@ -172,7 +172,7 @@ export default {
   padding: 0;
 }
 nav a {
-  color: #2790f9;
+  color: #2790f9 !important;
 }
 .navitem {
   color: white;

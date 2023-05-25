@@ -2,9 +2,7 @@
   <b-container class="bv-example-row">
     <b-row>
       <b-col align="center">
-        <h1 v-if="isAdmin">
-          {{ user.userId }}({{ user.userName }}) 사용자 정보 수정하기
-        </h1>
+        <h1 v-if="isAdmin">{{ user.userId }}({{ user.userName }}) 사용자 정보 수정하기</h1>
         <h1 v-else>Update My Info</h1>
         <div class="line justify-content-center"></div>
       </b-col>
@@ -13,12 +11,7 @@
 
     <b-row>
       <b-col cols="5">
-        <b-card
-          class="mt-3"
-          style="max-width: 40rem"
-          align="left"
-          id="cardbody"
-        >
+        <b-card class="mt-3" style="max-width: 40rem" align="left" id="cardbody">
           <b-form v-if="show">
             <b-form-group label="Name" label-for="userName">
               <b-form-input
@@ -29,11 +22,7 @@
                 class="form-control no-border"
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              label="ID"
-              label-for="userId"
-              description="아이디는 변경할 수 없어요!"
-            >
+            <b-form-group label="ID" label-for="userId" description="아이디는 변경할 수 없어요!">
               <b-form-input
                 id="userId-input"
                 v-model="user.userId"
@@ -98,16 +87,14 @@
               @click="modify"
               class="button mt-4"
               id="save"
-              >저장하기</b-button
-            >
+            >저장하기</b-button>
             <b-button
               type="button"
               variant="danger"
               @click="getUserInfo(user.userId)"
               class="button"
               id="reset"
-              >다시 수정하기</b-button
-            >
+            >다시 수정하기</b-button>
           </b-form>
         </b-card>
       </b-col>
