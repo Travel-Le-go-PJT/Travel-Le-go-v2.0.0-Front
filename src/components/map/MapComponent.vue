@@ -47,6 +47,9 @@ export default {
         level: this.level
       }
       this.map = new window.kakao.maps.Map(container, options);
+      if(this.lists != null && this.lists.length != 0){
+        this.makeMarker();
+      }
       if (this.selected != null && this.selected.length != 0) {
         this.changeSelected();
       }
@@ -170,8 +173,8 @@ export default {
     lists() {
       if(this.map!=undefined){
         this.map.setLevel(this.level);
+        this.makeMarker();
       }
-      this.makeMarker();
     },
     center() {
       if (this.center != null) {

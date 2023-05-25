@@ -19,7 +19,7 @@
             <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
       dialog-class="modal-dialog-centered">
       <template #default="{ cancel }">
-        <div class="d-flex" style="top: 50%; height: 420px;">
+        <div class="d-flex amodal" style="top: 50%; height: 420px;">
           <div class="modal-image-wrapper" style="flex: 4; padding: 0;">
             <img :src="selectedAttraction.image" class="modal-image" :alt="selectedAttraction.title">
           </div>
@@ -101,7 +101,10 @@ export default {
   width: 420px;
   height: 420px;
 }
-
+.amodal {
+  font-family: omyu_pretty;
+  font-size: 18px;
+}
 .close-icon {
   position: absolute;
   top: 10px;
