@@ -16,7 +16,9 @@
           required
         >
         </b-form-input>
-        <b-button variant="primary" @click="search"><b-icon-search></b-icon-search></b-button>
+        <b-button variant="primary" style="margin-right: 3px;" @click="search"><b-icon-search></b-icon-search></b-button>
+        <b-button variant="primary" @click="reset()"><b-icon-eraser-fill></b-icon-eraser-fill></b-button>
+
       </div>
     </div>
     <div class="row" id="board">
@@ -121,6 +123,11 @@ export default {
       }).then(({ data }) => {
         this.locations = data;
       });
+    },
+    
+    reset(){
+      this.keyword = "";
+      this.search();
     }
   },
 };
