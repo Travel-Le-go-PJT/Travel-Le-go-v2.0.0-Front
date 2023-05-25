@@ -3,7 +3,6 @@
         <b-card overlay :img-src="attraction.image" img-alt="Card Image" text-variant="white">
             <b-card-body>
                 <b-card-title>{{ attraction.title }}</b-card-title>
-                <b-card-sub-title>{{ Subtitle }}</b-card-sub-title>
                 <b-card-text>
                     {{ attraction.addr1 }}
                 </b-card-text>

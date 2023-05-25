@@ -98,6 +98,7 @@ export default {
       this.$router.push("/tripplan/planwrite");
     },
     getAllPlans() {
+      if(this.userInfo == null) return;
       http
         .get("/tripPlanBoard/")
         .then(({ data, status }) => {
@@ -112,6 +113,7 @@ export default {
         });
     },
     getMyPlans() {
+      if(this.userInfo == null) return;
       let myData = {
         key: "trip_plan_user_id",
         word: this.userInfo.userId,
@@ -132,6 +134,7 @@ export default {
         });
     },
     getFavoritePlans() {
+      if(this.userInfo == null) return;
       http
         .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
         .then(({ data, status }) => {

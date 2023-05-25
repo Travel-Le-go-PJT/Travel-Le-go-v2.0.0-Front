@@ -28,17 +28,6 @@
         </b-col>
       </b-row>
 
-      <div>
-        <b-progress class="progress-line" :value="progress"></b-progress>
-        <div class="progress-markers">
-          <b-progress
-            :value="marker"
-            v-for="marker in markers"
-            :key="marker"
-            class="progress-marker"
-          ></b-progress>
-        </div>
-      </div>
     </b-container>
     <div class="row slider hot-place">
       <div class="col-12 text-center">
@@ -307,21 +296,6 @@ video {
   transform: translate(-50%, -50%);
   min-width: 100%;
   min-height: 100%;
-}
-
-.progress-line {
-  height: 10px;
-}
-
-.progress-markers {
-  position: relative;
-}
-
-.progress-marker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  height: 100%;
 }
 
 .slider {

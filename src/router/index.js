@@ -60,6 +60,7 @@ const routes = [
       {
         path: "mypage",
         name: "mypage",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "user" */ "@/components/user/UserMyPage.vue"
@@ -68,6 +69,7 @@ const routes = [
       {
         path: "usermodify/:userId",
         name: "usermodify",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "user" */ "@/components/user/UserInfoModify.vue"
@@ -78,11 +80,13 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
+    beforeEnter: onlyAuthUser,
     component: AdminView,
     children: [
       {
         path: "userlist",
         name: "userlist",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "admin" */ "@/components/user/admin/AdminUserList.vue"
@@ -91,6 +95,7 @@ const routes = [
       {
         path: "userarticlelist/:userId",
         name: "userarticlelist",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "admin" */ "@/components/user/admin/AdminUserArticles.vue"
@@ -113,6 +118,7 @@ const routes = [
       {
         path: "planlist",
         name: "planlist",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanList"
@@ -138,6 +144,7 @@ const routes = [
       {
         path: "planmodify/:articleNo",
         name: "planmodify",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanModify"
@@ -146,6 +153,7 @@ const routes = [
       {
         path: "planscrap/:articleNo",
         name: "planscrap",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanScrap"
@@ -164,6 +172,7 @@ const routes = [
       {
         path: "infolist",
         name: "infolist",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardList.vue"
@@ -172,6 +181,7 @@ const routes = [
       {
         path: "infodetail/:articleNo",
         name: "infodetail",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardDetail.vue"
@@ -180,6 +190,7 @@ const routes = [
       {
         path: "infowrite",
         name: "infowrite",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardWrite.vue"
@@ -188,6 +199,7 @@ const routes = [
       {
         path: "infomodify/:articleNo",
         name: "infomodify",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "tripinfo" */ "@/components/tripinfo/TripInfoBoardModify.vue"
