@@ -47,6 +47,7 @@ export default {
   created() {
     if(this.$route.query.sidoCode != null){
       this.sidoCode = this.$route.query.sidoCode
+      this.title = this.$route.query.keyword
     }
     http.get("/attraction/sido")
       .then(({ data }) => {
