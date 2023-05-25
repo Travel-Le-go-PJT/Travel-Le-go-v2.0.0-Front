@@ -2,7 +2,7 @@
     <div class="detail">
         <div class="row">
             <div class="col-lg-7" style="height: 600px">
-                <map-component :level="10" :selected="selected"></map-component>
+                <map-component :level="12" :selected="selected"></map-component>
             </div>
             <div class="col-lg-5 d-flex justify-content-center">
                 <trip-plan-info :article="article"></trip-plan-info>
