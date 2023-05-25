@@ -107,6 +107,9 @@ export default {
           console.log(error);
         });
     },
+    deleteItem() {
+      this.boardList();
+    },
   },
 };
 </script>

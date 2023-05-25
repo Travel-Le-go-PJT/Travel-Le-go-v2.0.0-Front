@@ -19,11 +19,19 @@
         @click="adminModifyUserInfo(user.userId)"
       >수정하기</button>
     </td>
+    <td>
+      <button type="danger" class="btn-hover color-3 wbtn" @click="userWithdraw(user.userId)">회원 삭제</button>
+    </td>
   </tr>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import http from "@/api/http.js";
+import Vue from "vue";
+
+Vue.prototype.$EventBus = new Vue();
+const userStore = "userStore";
 export default {
   name: "AdminUserInfoItem",
   props: {
@@ -36,6 +44,9 @@ export default {
   },
   created() {
     this.getCount();
+  },
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
   },
   methods: {
     getCount() {
@@ -58,6 +69,14 @@ export default {
     adminModifyUserInfo(userId) {
       console.log(userId + "정보 수정하기");
       this.$router.push(`/user/usermodify/${userId}`);
+    },
+    userWithdraw() {
+      if (confirm("회원을 탈퇴시키겠습니까?") == true) {
+        http.put(`/user/${this.user.userId}`);
+        this.$router.push({ name: "userlist" });
+
+        this.$emit("userWithdraw");
+      }
     },
   },
 };
