@@ -1,5 +1,5 @@
 <template>
-  <b-container class="boarddetail">
+  <b-container class="boarddetail mb-5">
     <b-row>
       <b-col align="left">
         <div class="line justify-content-center sujectline"></div>
@@ -23,13 +23,19 @@
         </div>
       </b-col>
     </b-row>
-    <div class="line justify-content-center"></div>
-    <b-button
-      type="button"
-      class="btn-hover wbtn color-3 m-4"
-      @click="removeArticle(article.articleNo)"
-    >글 삭제하기</b-button>
-    <b-button type="button" class="btn-hover wbtn m-4" @click="moveModify(article.articleNo)">글 수정하기</b-button>
+    <div v-if="this.userInfo.userId == this.article.userId || this.userInfo.userId ==`admin`">
+      <div class="line justify-content-center"></div>
+      <b-button
+        type="button"
+        class="btn-hover wbtn color-3 m-4"
+        @click="removeArticle(article.articleNo)"
+      >글 삭제하기</b-button>
+      <b-button
+        type="button"
+        class="btn-hover wbtn m-4"
+        @click="moveModify(article.articleNo)"
+      >글 수정하기</b-button>
+    </div>
   </b-container>
   <!-- <div class="hello">
     <b-table id="book-detail">
@@ -61,17 +67,29 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import http from "@/api/http.js";
+const userStore = "userStore";
 export default {
   name: "TripInfoBoardDetail",
   data() {
     return {
       article: {},
+      checkWriter: Boolean,
     };
+  },
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
   },
   created() {
     let no = this.$route.params.articleNo;
     this.boarddetail(no);
+    if (
+      this.userInfo.userId == this.article.userId &&
+      this.userInfo.userId == "admin"
+    ) {
+      this.checkWriter = true;
+    }
   },
   methods: {
     boarddetail(no) {
@@ -111,7 +129,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 @font-face {
   font-family: "omyu_pretty";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
