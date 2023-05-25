@@ -1,10 +1,38 @@
 <template>
-  <div class="hello">
-    <table id="book-detail">
-      <tr>
-        <th>번호</th>
-        <td v-text="article.articleNo"></td>
-      </tr>
+  <b-container class="boarddetail">
+    <b-row>
+      <b-col align="left">
+        <div class="line justify-content-center sujectline"></div>
+        <div class="article" id="subject">{{ article.subject }}</div>
+        <b-icon icon="person-fill"></b-icon>&nbsp;
+        <span class="article" id="userId">{{ article.userId }} &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span class="article" id="registerTime">{{ article.registerTime }}&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <b-icon icon="eye-fill"></b-icon>&nbsp;&nbsp;
+        <span class="article" id="registerTime">{{ article.hit }}</span>
+        <div class="line justify-content-center"></div>
+        <div class="article" id="content">{{ article.content }}</div>
+        <div class="line justify-content-center"></div>
+        <div>댓글입니다.</div>
+        <textarea></textarea>
+        <div>
+          <b-button
+            type="button"
+            class="btn-hover wbtn review color-3 m-4"
+            @click="removeArticle(article.articleNo)"
+          >댓글 달기</b-button>
+        </div>
+      </b-col>
+    </b-row>
+    <div class="line justify-content-center"></div>
+    <b-button
+      type="button"
+      class="btn-hover wbtn color-3 m-4"
+      @click="removeArticle(article.articleNo)"
+    >글 삭제하기</b-button>
+    <b-button type="button" class="btn-hover wbtn m-4" @click="moveModify(article.articleNo)">글 수정하기</b-button>
+  </b-container>
+  <!-- <div class="hello">
+    <b-table id="book-detail">
       <tr>
         <th>작성자</th>
         <td v-text="article.userId"></td>
@@ -27,11 +55,9 @@
           <textarea rows="10" cols="50" v-text="article.content" readonly></textarea>
         </td>
       </tr>
-    </table>
+  </b-table>-->
 
-    <button type="button" class="btn-hover color-3" @click="removeArticle(article.articleNo)">글 삭제하기</button>
-    <button type="button" class="btn-hover color-3" @click="moveModify(article.articleNo)">글 수정하기</button>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -93,63 +119,28 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
-.hello {
+.line {
+  border-top: 1px solid #acacac;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.sujectline {
+  border-top: 2px solid #616161 !important;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.boarddetail {
   font-family: omyu_pretty;
-  font-size: 22px;
+  width: 40%;
+
+  /* font-size: 22px; */
 }
-#book-detail {
-  margin: auto;
-  width: 70%;
-  border-collapse: collapse;
-}
-#book-detail tr th {
-  border-top: none;
-  background: #ff9f20;
-  color: #fff;
+#subject {
+  font-size: 30px;
 }
 
-#book-detail tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fffeed;
-}
-
-#book-detail tr:nth-child(odd):not(:first-child) {
-  background-color: #fffeed;
-}
-
-#book-detail td:first-child {
-  margin-top: 0.5em;
-}
-#book-detail td:last-child {
-  margin-bottom: 0.5em;
-}
-
-#book-detail td:before {
-  font-weight: bold;
-  width: 120px;
-  display: inline-block;
-  color: #000;
-}
-
-#book-detail th,
-#book-detail td {
-  text-align: center;
-}
-
-#book-detail {
-  color: #333;
-  border-radius: 0.4em;
-  overflow: hidden;
-}
-#book-detail tr {
-  border-color: #bfbfbf;
-}
-
-#book-detail th,
-#book-detail td {
-  padding: 0.5em 2em;
-}
 textarea {
   font-family: omyu_pretty;
   width: 100%;
@@ -161,46 +152,22 @@ textarea {
   font-size: 20px;
   resize: both;
 }
-.btn-hover {
-  width: 100px;
-  font-family: omyu_pretty;
-  font-size: 21px;
-  font-weight: 600;
-  color: #ffffff;
-  cursor: pointer;
-  margin: 20px;
-  height: max-content + 10px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  padding: 10px 0px;
-  border-radius: 10px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+.review {
+  margin: 0px !important;
+  display: flex;
+  float: right;
 }
-
-.btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
 }
-
-.btn-hover:focus {
-  outline: none;
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #fca533,
-    #7dd66b,
-    #bad737
-  );
-  box-shadow: 0 4px 15px 0 rgba(145, 79, 68, 0.75);
+#content {
+  font-weight: 300;
 }
 </style>

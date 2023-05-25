@@ -1,11 +1,6 @@
 <template>
   <div>
-    <b-navbar
-      class="fixed-top"
-      :class="navbarClasses"
-      toggleable="lg"
-      justify-content-end
-    >
+    <b-navbar class="fixed-top" :class="navbarClasses" toggleable="lg" justify-content-end>
       <b-navbar-brand href="#">
         <router-link to="/">
           <b-img
@@ -22,15 +17,9 @@
       <b-collapse class="ml-auto" id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item href="#" class="rountlist ml-auto">
-            <router-link :to="{ name: 'attraction' }" class="navitem m-2 link"
-              >지역별여행지 &nbsp; &nbsp;/
-            </router-link>
-            <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link"
-              >나의여행계획 &nbsp;&nbsp; /
-            </router-link>
-            <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link"
-              >여행정보공유</router-link
-            >
+            <router-link :to="{ name: 'attraction' }" class="navitem m-2 link">지역별여행지 &nbsp; &nbsp;/</router-link>
+            <router-link :to="{ name: 'tripplan' }" class="navitem m-2 link">나의여행계획 &nbsp;&nbsp; /</router-link>
+            <router-link :to="{ name: 'tripinfo' }" class="navitem m-2 link">여행정보공유</router-link>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -42,31 +31,27 @@
               v-text="userInfo.userId.charAt(0).toUpperCase()"
             ></b-avatar>
           </b-nav-item>
-          <b-nav-item-dropdown right class="align-self-center"
-            >&nbsp;&nbsp;&nbsp; {{ userInfo.userName }}({{ userInfo.userId }})님
-
+          <b-nav-item-dropdown right class="align-self-center font">
+            &nbsp;&nbsp;&nbsp; {{ userInfo.userName }}({{ userInfo.userId }})님
             <div class="line justify-content-center"></div>
             <b-dropdown-item href="#" v-if="userInfo.userRole == 1">
               <router-link
                 :to="{ name: 'mypage' }"
-                class="user-dropdown link align-self-center"
-                >마이페이지</router-link
-              >
+                class="user-dropdown link align-self-center font"
+              >마이페이지</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#" v-else>
               <router-link
                 :to="{ name: 'userlist' }"
                 class="user-dropdown link align-self-center"
-                >회원관리</router-link
-              >
+              >회원관리</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <b-nav-item
                 id="logout"
                 class="user-dropdown align-self-center"
                 @click.prevent="onClickLogout"
-                >로그아웃</b-nav-item
-              >
+              >로그아웃</b-nav-item>
             </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -74,11 +59,7 @@
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <b-icon
-                icon="people"
-                font-scale="2"
-                style="color: #2790f9"
-              ></b-icon>
+              <b-icon icon="people" font-scale="2" style="color: #2790f9"></b-icon>
             </template>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'join' }" class="link">
@@ -152,6 +133,13 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "KCC-Jeongbeom";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCC-Jeongbeom.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 #logo {
   width: auto;
   height: 40px;
@@ -160,6 +148,7 @@ export default {
 .nav-link {
   text-decoration: none;
   padding: 0 !important;
+  font-family: KCC-Jeongbeom !important;
 }
 
 .line {
@@ -207,5 +196,8 @@ nav a {
 }
 a.nav-link {
   color: #2790f9;
+}
+.font {
+  font-family: KCC-Jeongbeom !important;
 }
 </style>

@@ -11,69 +11,58 @@
           ref="keyword"
           placeholder="검색어를 입력해주세요"
           required
-        >
-        </b-form-input>
-        <b-button variant="primary"><b-icon-search></b-icon-search></b-button>
+        ></b-form-input>
+        <b-button variant="primary">
+          <b-icon-search></b-icon-search>
+        </b-button>
       </div>
     </div>
 
     <div class="row" id="board"></div>
     <div>
-      <button
+      <b-button
         type="button"
         @click="writeArticle(article.articleNo)"
-        class="mr-2"
-      >
-        전체 목록
-      </button>
-      <button
-        type="button"
-        class="btn-hover color-3"
-        @click="writeArticle(article.articleNo)"
-      >
-        글 쓰기
-      </button>
-    </div>
-    <div>
+        class="btn-hover wbtn color-3 mt-4 mb-2 justify-content-right"
+      >글 쓰기</b-button>
       <table id="book-list">
         <colgroup>
           <col style="width: 10%" />
-          <col style="width: 30%" />
+          <col style="width: 23%" />
           <col style="width: 10%" />
           <col style="width: 13%" />
-          <col style="width: 20%" />
-          <col style="width: 5%" />
-          <col style="width: 5%" />
+          <col style="width: 10%" />
         </colgroup>
         <thead>
           <tr>
             <th>글번호</th>
-            <th>제목</th>
+            <th class="subject">제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>미리보기</th>
             <th>👍</th>
-            <th>삭제</th>
           </tr>
         </thead>
         <tbody id="item">
-          <template v-for="(article, index) in articles">
+          <template v-for="(article, index) in paginatedArticles">
             <trip-info-board-item
               :article="article"
               :index="index"
               :key="article.articleNo"
-              @addtotcount="addTotalCount"
               @deleteitem="deleteItem"
             ></trip-info-board-item>
           </template>
         </tbody>
       </table>
-    </div>
-    <div>
-      <span>내용 : {{ showContent }}</span>
-    </div>
-    <div id="recommend">
-      <span>전체 추천 수 : {{ total }}</span>
+      <b-pagination
+        pills
+        size="sm"
+        align="center"
+        v-model="currentPage"
+        :total-rows="articles.length"
+        :per-page="perPage"
+        aria-controls="item"
+        class="mt-4"
+      ></b-pagination>
     </div>
   </div>
 </template>
@@ -94,7 +83,16 @@ export default {
       showContent: "",
       total: 0,
       article: {},
+      currentPage: 1,
+      perPage: 10,
     };
+  },
+  computed: {
+    paginatedArticles() {
+      const startIndex = (this.currentPage - 1) * this.perPage;
+      const endIndex = startIndex + this.perPage;
+      return this.articles.slice(startIndex, endIndex);
+    },
   },
   created() {
     this.$EventBus.$on("showContent", (val) => {
@@ -151,7 +149,7 @@ export default {
 
 #title {
   font-family: KCC-Jeongbeom;
-  color: #ff9900;
+  color: #2790f9;
   width: 800px;
   text-align: center;
   margin: 0 auto;
@@ -163,6 +161,7 @@ export default {
 #board {
   width: 70vw;
   margin: 0 auto;
+  border-radius: 0;
 }
 
 #searchBox {
@@ -171,7 +170,9 @@ export default {
   width: 250px;
 }
 #book-list tbody > tr {
-  background: #fffeed;
+  background: #ffffff;
+  border-right: none;
+  border-left: none;
 }
 .boardList {
   font-family: omyu_pretty;
@@ -179,14 +180,14 @@ export default {
 }
 #book-list {
   margin: auto;
-  width: 70%;
+  width: 50%;
   border-collapse: collapse;
 }
 #book-list thead > tr {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-  font-size: 25px;
+  /* border-top: ; */
+  background: #ebf5ff;
+  color: #303033;
+  font-size: 20px;
 }
 
 #book-list tr {
@@ -207,7 +208,7 @@ export default {
 }
 
 #book-list td:before {
-  font-weight: bold;
+  /* font-weight: bold; */
   width: 120px;
   display: inline-block;
   color: #000;
@@ -216,17 +217,20 @@ export default {
 #book-list th,
 #book-list td {
   text-align: center;
+
+  font-weight: 400;
 }
 
 #book-list {
   color: #333;
-  border-radius: 0.4em;
   overflow: hidden;
 }
 #book-list tr {
   border-color: #bfbfbf;
 }
-
+.subject {
+  float: left;
+}
 #book-list th,
 #book-list td {
   padding: 0.5em 1em;
@@ -236,14 +240,14 @@ export default {
   font-size: 50px;
 }
 
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #ffb34f,
-    #b6d66b,
-    #bad737
-  );
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
+}
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
 </style>

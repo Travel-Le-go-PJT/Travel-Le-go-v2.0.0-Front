@@ -1,7 +1,8 @@
 <template>
   <div class="boardList">
     <h1 id="title"></h1>
-    <div>
+    <div id="header">
+      <h6>회원들을 관리할 수 있어요.</h6>
       <table id="book-list">
         <colgroup>
           <col style="width: 10%" />
@@ -23,11 +24,7 @@
         </thead>
         <tbody id="item">
           <template v-for="(user, index) in users">
-            <admin-user-info-item
-              :user="user"
-              :index="index"
-              :key="user.userId"
-            ></admin-user-info-item>
+            <admin-user-info-item :user="user" :index="index" :key="user.userId"></admin-user-info-item>
           </template>
         </tbody>
       </table>
@@ -83,10 +80,9 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
-
 #title {
   font-family: KCC-Jeongbeom;
-  color: #ff9900;
+  color: #2790f9;
   width: 800px;
   text-align: center;
   margin: 0 auto;
@@ -94,8 +90,22 @@ export default {
 /* #item :hover {
   background: #ff9900;
 } */
+
+#board {
+  width: 70vw;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+#searchBox {
+  margin: 0 auto;
+  display: flex;
+  width: 250px;
+}
 #book-list tbody > tr {
-  background: #fffeed;
+  background: #ffffff;
+  border-right: none;
+  border-left: none;
 }
 .boardList {
   font-family: omyu_pretty;
@@ -103,14 +113,14 @@ export default {
 }
 #book-list {
   margin: auto;
-  width: 70%;
+  width: 50%;
   border-collapse: collapse;
 }
 #book-list thead > tr {
-  border-top: none;
-  background: #fca118;
-  color: #fff;
-  font-size: 25px;
+  /* border-top: ; */
+  background: #ebf5ff;
+  color: #303033;
+  font-size: 20px;
 }
 
 #book-list tr {
@@ -131,7 +141,7 @@ export default {
 }
 
 #book-list td:before {
-  font-weight: bold;
+  /* font-weight: bold; */
   width: 120px;
   display: inline-block;
   color: #000;
@@ -140,17 +150,20 @@ export default {
 #book-list th,
 #book-list td {
   text-align: center;
+
+  font-weight: 400;
 }
 
 #book-list {
   color: #333;
-  border-radius: 0.4em;
   overflow: hidden;
 }
 #book-list tr {
   border-color: #bfbfbf;
 }
-
+.subject {
+  float: left;
+}
 #book-list th,
 #book-list td {
   padding: 0.5em 1em;
@@ -160,14 +173,14 @@ export default {
   font-size: 50px;
 }
 
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #ffb34f,
-    #b6d66b,
-    #bad737
-  );
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
+}
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
 </style>
