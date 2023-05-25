@@ -13,7 +13,7 @@
                 </div>
             </template>
         </b-table>
-        <b-pagination pills size="sm" align="center" v-model="currentPage" :total-rows="rows"
+        <b-pagination pills size="sm" per-page="5" align="center" v-model="currentPage" :total-rows="rows"
             aria-controls="tb" :limit="10"></b-pagination>
 
             <b-modal v-model="isModalOpen" hide-header hide-footer size="xl" body-class="p-0"
