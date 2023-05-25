@@ -5,11 +5,14 @@
       <h6>회원들을 관리할 수 있어요.</h6>
       <table id="book-list">
         <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 10%" />
-          <col style="width: 15%" />
-          <col style="width: 15%" />
           <col style="width: 5%" />
+          <col style="width: 5%" />
+          <col style="width: 15%" />
+          <col style="width: 10%" />
+          <col style="width: 10%" />
+          <col style="width: 15%" />
+          <col style="width: 15%" />
+          <col style="width: 15%" />
         </colgroup>
         <thead>
           <tr>
@@ -17,15 +20,19 @@
             <th>아이디</th>
             <th>가입일</th>
             <th>이메일</th>
-            <th>작성글 개수</th>
-            <th>작성글 보기</th>
+            <th>글 수</th>
+            <th>글 보기</th>
             <th>수정하기</th>
-            <th>회원 삭제</th>
+            <th>삭제</th>
           </tr>
-        </thead>c
+        </thead>
         <tbody id="item">
           <template v-for="(user, index) in users">
-            <admin-user-info-item :user="user" :index="index" :key="user.userId"></admin-user-info-item>
+            <admin-user-info-item
+              :user="user"
+              :index="index"
+              :key="user.userId"
+            ></admin-user-info-item>
           </template>
         </tbody>
       </table>

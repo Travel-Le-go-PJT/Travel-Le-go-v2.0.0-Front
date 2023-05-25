@@ -10,17 +10,27 @@
         type="submit"
         class="btn-hover color-3 wbtn"
         @click="getUserArticle(user.userId)"
-      >작성글 보기</button>
+      >
+        작성글 보기
+      </button>
     </td>
     <td>
       <button
         type="submit"
         class="btn-hover color-3 wbtn"
         @click="adminModifyUserInfo(user.userId)"
-      >수정하기</button>
+      >
+        수정하기
+      </button>
     </td>
     <td>
-      <button type="danger" class="btn-hover color-3 wbtn" @click="userWithdraw(user.userId)">회원 삭제</button>
+      <button
+        type="danger"
+        class="btn-hover color-3 wbtn"
+        @click="userWithdraw(user.userId)"
+      >
+        삭제
+      </button>
     </td>
   </tr>
 </template>
@@ -73,9 +83,9 @@ export default {
     userWithdraw() {
       if (confirm("회원을 탈퇴시키겠습니까?") == true) {
         http.put(`/user/${this.user.userId}`);
-        this.$router.push({ name: "userlist" });
-
-        this.$emit("userWithdraw");
+        // this.$router.push({ name: "userlist" });
+        window.location.reload(true);
+        // this.$emit("userWithdraw");
       }
     },
   },
