@@ -13,7 +13,8 @@
           required
         >
         </b-form-input>
-        <b-button variant="primary" @click="search(btnNum)"><b-icon-search></b-icon-search></b-button>
+        <b-button variant="primary" style="margin-right: 3px;" @click="search(btnNum)"><b-icon-search></b-icon-search></b-button>
+        <b-button variant="primary" @click="reset()"><b-icon-eraser-fill></b-icon-eraser-fill></b-button>
       </div>
       <div class="board row mt-4 mb-3">
         <div class="col-3"></div>
@@ -170,16 +171,10 @@ export default {
         
       });
     },
-    // makeBoard(val){
-    //   this.makeBtnSelected(val);
-    //   if(val == 1){
-    //     this.articles = this.allPlans;
-    //   }else if(val == 2){
-    //     this.articles = this.myPlans;
-    //   }else{
-    //     this.articles = this.favoritePlans;
-    //   }
-    // }
+    reset(){
+      this.keyword = "";
+      this.search(this.btnNum);
+    }
   },
 };
 </script>
