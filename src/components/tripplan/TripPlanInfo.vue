@@ -28,9 +28,11 @@
         </b-form-group>
         <div class="row">
             <div class="col-5 btn-container">
-                <b-button class="btn-hover color-3" @click="moveList">
+                <b-button class="btn-hover color-3" style="margin-right: 10px" @click="moveList">
                     글 목록</b-button>
-                <b-button class="btn-hover color-3" v-if="userInfo != null && (userInfo.userId === article.userId || userInfo.userRole === 2)"
+                <b-button class="btn-hover color-3" style="margin-right: 10px" v-if="userInfo != null && (userInfo.userId != article.userId && userInfo.userRole === 1)"
+                    @click="moveScrap(localArticle.articleNo)">계획가져오기</b-button>
+                <b-button class="btn-hover color-3" style="margin-right: 10px" v-if="userInfo != null && (userInfo.userId === article.userId || userInfo.userRole === 2)"
                     @click="moveModify(localArticle.articleNo)">글 수정하기</b-button>
                 <b-button class="btn-hover color-3" v-if="userInfo != null && (userInfo.userId === article.userId || userInfo.userRole === 2)"
                     @click="removeArticle(localArticle.articleNo)">글 삭제하기</b-button>
@@ -85,6 +87,10 @@ export default {
         moveModify(no) {
             if (no == null) return;
             this.$router.push(`/tripplan/planmodify/${no}`);
+        },
+        moveScrap(no){
+            if (no == null) return;
+            this.$router.push(`/tripplan/planscrap/${no}`);
         },
         favorite(no) {
             if (this.userInfo == null || no == null) {
@@ -191,7 +197,6 @@ export default {
 
 .btn-container {
     display: flex;
-    justify-content: space-between;
     margin: 20px;
     padding: 0;
 }
