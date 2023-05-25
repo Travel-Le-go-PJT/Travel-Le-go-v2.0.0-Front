@@ -1,14 +1,14 @@
 <template>
-  <div class="hello">
+  <div class="tripinfo">
     <form action="#none" method="post" id="_frmForm" name="frmForm" @submit.prevent="addArticle">
       <table id="book-detail">
         <tr>
           <th>작성자</th>
           <td>
-            <input type="text" v-model="userId" id="userId" ref="userId" />
+            <input type="text" v-model="this.userInfo.userId" readonly />
           </td>
         </tr>
-        <tr>
+        <tr id="subjectarea">
           <th>제목</th>
           <td>
             <input type="text" v-model="subject" id="subject" ref="subject" />
@@ -21,13 +21,15 @@
           </td>
         </tr>
       </table>
-      <button type="submit" class="btn-hover color-3">글 등록하기</button>
+      <button type="submit" class="btn-hover wbtn color-3">글 등록하기</button>
     </form>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import http from "@/api/http";
+const userStore = "userStore";
 export default {
   name: "TripInfoBoardWrite",
   components: {},
@@ -38,19 +40,19 @@ export default {
       content: "",
     };
   },
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
+  },
   created() {},
   methods: {
     addArticle() {
       let err = "true";
       let msg = "";
-      if (!this.userId) {
-        msg = "작성자를 입력해주세요";
-        err = false;
-        this.$refs.subject.focuse();
-      } else if (!this.content && err) {
+      this.userId = this.userInfo.userId;
+      if (!this.content && err) {
         msg = "내용을 입력해주세요";
         err = false;
-        this.$refs.subject.focuse();
+        this.$refs.content.focuse();
       } else if (!this.subject && err) {
         msg = "제목을 입력해주세요";
         err = false;
@@ -82,33 +84,69 @@ export default {
 </script>
 
 <style scoped>
-input {
-  border: none;
-  width: 100%;
-  height: 20px;
+@font-face {
+  font-family: "omyu_pretty";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
-.hello {
+.tripinfo {
+  font-family: omyu_pretty;
+  font-size: 16px;
+}
+.line {
+  border-top: 1px solid #acacac;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.sujectline {
+  border-top: 2px solid #616161 !important;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.boarddetail {
+  font-family: omyu_pretty;
+  width: 40%;
+
+  /* font-size: 22px; */
+}
+input {
   font-family: Pretendard;
+  box-sizing: border-box;
+  border: solid 2px #666666;
+  border-radius: 5px;
+  width: 100%;
+  height: 60px;
+  margin: 0px;
+}
+#subjectarea {
+  height: 60px;
 }
 #book-detail {
   margin: auto;
-  width: 70%;
+  width: 50%;
   border-collapse: collapse;
 }
 #book-detail tr th {
   border-top: none;
-  background: #fca118;
-  color: #fff;
+  width: 150px;
+  font-size: 20px;
+  font-weight: bold;
+  /* background: #fca118; */
+  color: #666666;
 }
 
 #book-detail tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: #fffeed;
+  /* background-color: #fffeed; */
 }
 
 #book-detail tr:nth-child(odd):not(:first-child) {
-  background-color: #fffeed;
+  /* background-color: #fffeed; */
 }
 
 #book-detail td:first-child {
@@ -149,51 +187,20 @@ textarea {
   height: 200px;
   padding: 10px;
   box-sizing: border-box;
-  border: solid 2px #fffeed;
+  border: solid 2px #666666;
   border-radius: 5px;
   font-size: 16px;
   resize: both;
 }
-
-.btn-hover {
-  width: 100px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
+.wbtn {
+  background-color: #fff;
+  border-color: #2790f9;
+  color: #2790f9;
   margin: 20px;
-  height: max-content + 10px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  padding: 10px 0px;
-  border-radius: 10px;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
 }
-
-.btn-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}
-
-.btn-hover:focus {
-  outline: none;
-}
-
-.btn-hover.color-3 {
-  background-image: linear-gradient(
-    to right,
-    #f3f04f,
-    #ffb34f,
-    #b6d66b,
-    #bad737
-  );
-  box-shadow: 0 4px 15px 0 rgba(145, 79, 68, 0.75);
+.wbtn:hover {
+  background-color: #2790f9;
+  border-color: #2790f9;
+  color: #fff;
 }
 </style>

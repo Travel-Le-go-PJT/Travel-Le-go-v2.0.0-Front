@@ -4,10 +4,7 @@
     <td class="subject">{{ article.subject }}</td>
     <td>{{ article.userId }}</td>
     <td>{{ article.registerTime }}</td>
-    <td @click="addCount()">
-      <span>👍</span>
-      {{ count }}
-    </td>
+    <td>{{ article.hit }}</td>
   </tr>
 </template>
 
