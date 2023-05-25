@@ -114,7 +114,7 @@ export default {
   /* font-size: 22px; */
 }
 input {
-  font-family: Pretendard;
+  font-family: omyu_pretty;
   box-sizing: border-box;
   border: solid 2px #666666;
   border-radius: 5px;
@@ -182,7 +182,7 @@ input {
   padding: 0.5em 2em;
 }
 textarea {
-  font-family: Pretendard;
+  font-family: omyu_pretty;
   width: 100%;
   height: 200px;
   padding: 10px;
