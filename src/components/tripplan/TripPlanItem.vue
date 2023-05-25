@@ -37,24 +37,26 @@ export default {
     };
   },
   mounted() {
-    let myData = {
-      articleNo: this.article.articleNo,
-      userId: this.userInfo.userId,
-    };
-    http
-      .get("/tripPlanBoard/favorite", {
-        params: myData,
-      })
-      .then(({ data }) => {
-        if (data) {
-          this.isFavorite = true;
-          this.favoriteIcon = "heart-fill";
-        } else {
-          this.isFavorite = false;
-          this.favoriteIcon = "heart";
-        }
-      })
-      .catch(() => { });
+    if(this.userInfo != null){
+      let myData = {
+        articleNo: this.article.articleNo,
+        userId: this.userInfo.userId,
+      };
+      http
+        .get("/tripPlanBoard/favorite", {
+          params: myData,
+        })
+        .then(({ data }) => {
+          if (data) {
+            this.isFavorite = true;
+            this.favoriteIcon = "heart-fill";
+          } else {
+            this.isFavorite = false;
+            this.favoriteIcon = "heart";
+          }
+        })
+        .catch(() => { });
+    }
       http.get(`/tripPlanBoard/favorite/${this.article.articleNo}`)
                 .then(({ data }) => {
                     this.favoriteCount = data;

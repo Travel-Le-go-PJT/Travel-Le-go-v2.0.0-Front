@@ -64,6 +64,7 @@ export default {
     }
   },
   created() {
+    if(this.userInfo!=null)
     this.writeArticle.userId = this.userInfo.userId;
   },
   computed: {

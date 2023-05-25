@@ -118,6 +118,7 @@ const routes = [
       {
         path: "planlist",
         name: "planlist",
+        beforeEnter: onlyAuthUser,
         component: () =>
           import(
             /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanList"
