@@ -1,13 +1,17 @@
 <template>
   <tr class="table-striped" @click="showArticle(article.articleNo)">
     <td>{{ index + 1 }}</td>
-    <td class="subject">{{ article.subject }}</td>
+    <td class="subject" v-if="index < 5">
+      {{ article.subject }} <b-button id="new" disabled>new</b-button>
+    </td>
+    <td class="subject" v-else>
+      {{ article.subject }}
+    </td>
     <td>{{ article.userId }}</td>
     <td>{{ article.registerTime }}</td>
     <td>{{ article.hit }}</td>
   </tr>
 </template>
-
 
 <script>
 import http from "@/api/http.js";
@@ -76,6 +80,13 @@ export default {
   width: 120px;
   display: inline-block;
   color: #000;
+}
+#new {
+  background-color: red;
+  font-size: 60%;
+  border: none;
+  padding: 0.8px;
+  margin-left: 8px;
 }
 .subject {
   float: left;
