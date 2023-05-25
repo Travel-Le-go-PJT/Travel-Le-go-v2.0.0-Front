@@ -20,8 +20,9 @@
             <th>작성글 개수</th>
             <th>작성글 보기</th>
             <th>수정하기</th>
+            <th>회원 삭제</th>
           </tr>
-        </thead>
+        </thead>c
         <tbody id="item">
           <template v-for="(user, index) in users">
             <admin-user-info-item :user="user" :index="index" :key="user.userId"></admin-user-info-item>
@@ -60,6 +61,9 @@ export default {
           console.log("[사용자 정보 리스트 에러]");
           console.log(error);
         });
+    },
+    deleteItem() {
+      this.userlist();
     },
   },
 };

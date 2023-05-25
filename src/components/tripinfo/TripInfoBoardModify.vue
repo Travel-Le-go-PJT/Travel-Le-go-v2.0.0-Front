@@ -139,7 +139,7 @@ export default {
   /* font-size: 22px; */
 }
 input {
-  font-family: Pretendard;
+  font-family: omyu_pretty;
   box-sizing: border-box;
   border: solid 2px #666666;
   border-radius: 5px;
