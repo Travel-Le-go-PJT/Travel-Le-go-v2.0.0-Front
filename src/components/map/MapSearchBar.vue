@@ -17,7 +17,7 @@
       </select>
     </b-col>
     <b-col class="sm-3">
-      <b-form-input v-model="title" id="title" type="text" ref="title" placeholder="검색어를 입력해주세요"
+      <b-form-input v-model="title" id="titleInput" type="text" ref="title" placeholder="검색어를 입력해주세요"
         @keydown.enter="searchMap" required>
       </b-form-input>
     </b-col>

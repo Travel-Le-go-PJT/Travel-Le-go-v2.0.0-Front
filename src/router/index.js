@@ -143,11 +143,14 @@ const routes = [
             /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanModify"
           ),
       },
-      // {
-      //   path: "delete/:articleno",
-      //   name: "boarddelete",
-      //   component: () => import(/* webpackChunkName: "board" */ "@/components/tripplan/BoardDelete"),
-      // },
+      {
+        path: "planscrap/:articleNo",
+        name: "planscrap",
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/tripplan/TripPlanScrap"
+          ),
+      },
     ],
   },
   {

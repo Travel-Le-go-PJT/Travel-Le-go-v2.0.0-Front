@@ -108,7 +108,7 @@ export default {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #dfdf52;
+  background: #76e9af;
   left: 50%;
   margin-left: -1px;
 }
@@ -119,7 +119,7 @@ export default {
 }
 
 .timeline-content {
-  background: #b7cf8d;
+  background: #b9d3cf;
   padding: 20px;
   position: relative;
   border-radius: 5px;
