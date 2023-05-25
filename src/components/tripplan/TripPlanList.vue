@@ -100,8 +100,12 @@ export default {
     getAllPlans() {
       http
         .get("/tripPlanBoard/")
-        .then(({ data }) => {
-          this.allPlans = data;
+        .then(({ data, status }) => {
+          if(status == 200){
+            this.allPlans = data;
+          }else{
+            this.allPlans = [];
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -116,8 +120,12 @@ export default {
         .get("/tripPlanBoard/", {
           params: myData,
         })
-        .then(({ data }) => {
-          this.myPlans = data;
+        .then(({ data, status }) => {
+          if(status == 200){
+            this.myPlans = data;
+          }else{
+            this.myPlans = [];
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -126,8 +134,12 @@ export default {
     getFavoritePlans() {
       http
         .get(`/tripPlanBoard/favoriteArticles/${this.userInfo.userId}`)
-        .then(({ data }) => {
-          this.favoritePlans = data;
+        .then(({ data, status }) => {
+          if(status == 200){
+            this.favoritePlans = data;
+          }else{
+            this.favoritePlans = [];
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -160,6 +172,7 @@ export default {
           }else{
             temp = this.favoritePlans;
           }
+          console.log(temp);
           this.articles = data.filter(el=>{
             return temp.some(el2 =>
               el.articleNo == el2.articleNo
